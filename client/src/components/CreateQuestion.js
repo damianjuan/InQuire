@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuestionContext } from "../utils/CreateQuestionState";
-import CreateMultipleChoice from "../components/CreateMultipleChoice";
+import CreateMultiple from "../components/CreateMultiple";
 
 function CreateQuestion({ handleTypeChange }) {
     const [state, dispatch] = useQuestionContext();
@@ -8,20 +8,17 @@ function CreateQuestion({ handleTypeChange }) {
     function testDiv(a) {
         switch (a) {
             case "multipleChoice":
-                return (
-                    <CreateMultipleChoice />
-                );
             case "selectApply":
                 return (
-                    <div>thing2</div>
+                    <CreateMultiple />
                 );
             case "freeResponse":
                 return (
-                    <div>thing3</div>
+                    <div className="text-xl">Free response will allow users to submit their own responses.</div>
                 );
             default:
                 return (
-                    <div>Invalid</div>
+                    <div>Invalid Question Type</div>
                 )
         }
     } 

@@ -1,6 +1,6 @@
 import React from "react";
 
-function CreateMultipleChoice() {
+function CreateMultiple() {
     return(
         <div className="flex flex-col text-xl flex-1">
             Answer Choices:
@@ -24,4 +24,4 @@ function CreateMultipleChoice() {
     );
 }
 
-export default CreateMultipleChoice;
+export default CreateMultiple;
