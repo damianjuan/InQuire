@@ -9,12 +9,8 @@ function CreateSurvey() {
         contents: []
     });
 
-    function handleChange(e) {
-        const questionType = e.target.value;
-        console.log("questionType - ", questionType);
-        
-        questionState.type = questionType;
-        console.log("state - ", questionState);
+    function handleTypeChange(e) {
+        questionState.type = e.target.value;        
 
         setQuestionState({
             ...questionState
@@ -30,7 +26,7 @@ function CreateSurvey() {
                 </label>
             </form>
             <QuestionProvider value={questionState}>
-                <CreateQuestion handleChange={handleChange}/>
+                <CreateQuestion handleTypeChange={handleTypeChange}/>
             </QuestionProvider>
         </main>
     )

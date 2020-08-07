@@ -1,15 +1,15 @@
 import React from "react";
 import { useQuestionContext } from "../utils/CreateQuestionState";
+import CreateMultipleChoice from "../components/CreateMultipleChoice";
 
-function CreateQuestion({ handleChange }) {
+function CreateQuestion({ handleTypeChange }) {
     const [state, dispatch] = useQuestionContext();
-    console.log("state - ", state);
 
     function testDiv(a) {
         switch (a) {
             case "multipleChoice":
                 return (
-                    <div>thing1</div>
+                    <CreateMultipleChoice />
                 );
             case "selectApply":
                 return (
@@ -35,7 +35,7 @@ function CreateQuestion({ handleChange }) {
                 </label>
                 <label className="flex-1 text-xl mx-auto">
                     Select Question Type: 
-                    <select className="my-2" name="questionType" onChange={handleChange}>
+                    <select className="my-2" name="questionType" onChange={handleTypeChange}>
                         <option value="multipleChoice">Multiple Choice</option>
                         <option value="selectApply">Select All That Apply</option>
                         <option value="freeResponse">Free Response</option>
