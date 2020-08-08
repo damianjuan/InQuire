@@ -5,8 +5,8 @@ import CreateMultiple from "../components/CreateMultiple";
 function CreateQuestion({ handleTypeChange }) {
     const [state, dispatch] = useQuestionContext();
 
-    function testDiv(a) {
-        switch (a) {
+    function testDiv(type) {
+        switch (type) {
             case "multipleChoice":
             case "selectApply":
                 return (

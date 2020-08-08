@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CreateQuestion from "../components/CreateQuestion";
 import { QuestionProvider } from "../utils/CreateQuestionState";
+import StoredQuestions from "../components/StoredQuestions";
 
 function CreateSurvey() {
     const [questionState, setQuestionState] = useState({
@@ -26,6 +27,7 @@ function CreateSurvey() {
                 </label>
             </form>
             <QuestionProvider value={questionState}>
+                <StoredQuestions />
                 <CreateQuestion handleTypeChange={handleTypeChange}/>
             </QuestionProvider>
         </main>
