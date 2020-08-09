@@ -11,19 +11,19 @@ const { Provider } = QuestionContext;
 function reducer(state, action) {
     switch (action.call) {
         case "add":
-            // return [
-            //     ...state,
-            //     {
-            //         id: action.id,
-            //         question: action.question,
-            //         type: action.type,
-            //         contents: action.Contents
-            //     }
-            // ];
+            return [
+                ...state,
+                {
+                    id: state.length * Math.random(),
+                    question: action.question,
+                    type: action.type,
+                    contents: action.Contents
+                }
+            ];
             return state;
         case "change":
             return state.map((item, i) => {
-                if (i === (state.length - 1)) {
+                if (i === 0) {
                     if (action.type) {
                         item.type = action.type;
                     } else if (action.question) {
