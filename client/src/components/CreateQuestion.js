@@ -1,22 +1,18 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useQuestionContext } from "../utils/CreateQuestionState";
 import CreateMultiple from "../components/CreateMultiple";
 
-function CreateQuestion(/*{ handleFieldChange }*/) {
-    const questionRef = useRef();
-    const answerOneRef = useRef();
-    const answerTwoRef = useRef();
-    const answerThreeRef = useRef();
-    const answerFourRef = useRef();
+function CreateQuestion() {
     const [state, dispatch] = useQuestionContext();
-    console.log(state);
+    const CURRENT_QUESTION = state[state.length - 1];
+    console.log(state, "----", CURRENT_QUESTION);
 
     function testDiv(type) {
         switch (type) {
             case "multipleChoice":
             case "selectApply":
                 return (
-                    <CreateMultiple answerOneRef={answerOneRef} answerTwoRef={answerTwoRef} answerThreeRef={answerThreeRef} answerFourRef={answerFourRef} />
+                    <CreateMultiple />
                 );
             case "freeResponse":
                 return (
@@ -34,18 +30,18 @@ function CreateQuestion(/*{ handleFieldChange }*/) {
 
         dispatch({
             call: "add",
-            question: state.question,
-            type: state.type,
-            contents: state.contents
+            question: CURRENT_QUESTION.question,
+            type: CURRENT_QUESTION.type,
+            contents: CURRENT_QUESTION.contents
         });
     }
 
     return(
         <form className="flex flex-col p-2 mx-4" onSubmit={addQuestion}>
             <div className="flex flex-col flex-1">
-                <label className="flex-1 text-xl mx-auto" ref={questionRef}>
+                <label className="flex-1 text-xl mx-auto">
                     Input Prompt:
-                    <input className="my-2 w-full" type="text" name="question" />
+                    <input className="my-2 w-full" type="text" name="question" onChange={(e) => dispatch({call: "change", question: e.target.value})} />
                 </label>
                 <label className="flex-1 text-xl mx-auto">
                     Select Question Type: 
@@ -57,7 +53,7 @@ function CreateQuestion(/*{ handleFieldChange }*/) {
                     </select>
                 </label>
             </div>
-            {testDiv(state[state.length - 1].type)}
+            {testDiv(CURRENT_QUESTION.type)}
             <button className="m-2 p-2 bg-yellow-500 rounded-full w-40 self-end" type="submit">Add Question</button>
         </form>
     );

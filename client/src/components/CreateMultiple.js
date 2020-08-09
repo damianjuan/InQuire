@@ -1,6 +1,17 @@
 import React from "react";
+import { useQuestionContext } from "../utils/CreateQuestionState";
 
-function CreateMultiple({ handleFieldChange }) {
+function CreateMultiple() {
+    const [state, dispatch] = useQuestionContext();
+
+    function handleFieldChange(e) {
+        dispatch({
+            call: "change",
+            slot: parseInt(e.target.name),
+            choice: e.target.value
+        });
+    }
+
     return(
         <div className="flex flex-col text-xl flex-1">
             Answer Choices:

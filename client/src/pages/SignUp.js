@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function SignUp() {
     return (
-        <p className="mx-auto my-4 p-8 w-5/6 bg-gray-300 text-xl">
+        <main className="mx-auto my-4 p-8 w-5/6 bg-gray-300 text-xl">
             <div>
                 <input className="my-2 w-3/6" type="text" name="prompt" placeholder="Email" />
             </div>
@@ -13,7 +13,7 @@ function SignUp() {
             <div>
                 <Link to={process.env.PUBLIC_URL + '/'}>Sign Up</Link>
             </div>
-        </p>
+        </main>
     );
 }
 
