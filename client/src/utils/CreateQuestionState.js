@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, useState } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
 const QuestionContext = createContext({
     id: "",
@@ -11,27 +11,39 @@ const { Provider } = QuestionContext;
 function reducer(state, action) {
     switch (action.call) {
         case "add":
-            return [
-                ...state,
-                {
-                    id: state.length * Math.random(),
-                    question: action.question,
-                    type: action.type,
-                    contents: action.Contents
+            // return [
+            //     ...state,
+            //     {
+            //         id: action.id,
+            //         question: action.question,
+            //         type: action.type,
+            //         contents: action.Contents
+            //     }
+            // ];
+            return state;
+        case "change":
+            return state.map((item, i) => {
+                if (i === (state.length - 1)) {
+                    return Object.assign({}, item, {
+                        type: action.type
+                    });
                 }
-            ];
+                return item;
+            });
+            // const item = state[state.length - 1];
+            // const changed = Object.assign(item, {
+            //     type: action.type
+            // });
+            // console.log(changed);
         default:
             return state;
     }
 }
 
-function QuestionProvider({ value, ...props}) {
-    const [state, dispatch] = useReducer(reducer, []);
-    // console.log(state);
-    // console.log(dispatch);
-    // console.log("value", value);
+function QuestionProvider({ value = [{ id: "", question: "", type: "choose", contents: [] }], ...props}) {
+    const [state, dispatch] = useReducer(reducer, value);
 
-    return <Provider value={[value, dispatch]} {...props} />;
+    return <Provider value={[state, dispatch]} {...props} />;
 }
 
 function useQuestionContext() {
