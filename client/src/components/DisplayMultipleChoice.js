@@ -1,6 +1,6 @@
 import React from "react";
 
-function DisplayMultiple({ id, contents }) {
+function DisplayMultipleChoice({ id, contents }) {
     return (
         <div className="flex flex-col">
             {contents.map((item, i) => (
@@ -13,4 +13,4 @@ function DisplayMultiple({ id, contents }) {
     );
 }
 
-export default DisplayMultiple;
+export default DisplayMultipleChoice;

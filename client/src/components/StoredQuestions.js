@@ -1,5 +1,6 @@
 import React from "react";
-import DisplayMultiple from "../components/DisplayMultiple";
+import DisplayMultipleChoice from "../components/DisplayMultipleChoice";
+import DisplaySelectMultiple from "../components/DisplaySelectMultiple"
 import { useQuestionContext } from "../utils/CreateQuestionState";
 
 function StoredQuestions() {
@@ -12,8 +13,16 @@ function StoredQuestions() {
         switch (type) {
             case "multipleChoice":
                 return (
-                    <DisplayMultiple id={id} contents={contents}/>
+                    <DisplayMultipleChoice id={id} contents={contents} />
                 );
+            case "selectApply":
+                return (
+                    <DisplaySelectMultiple id={id} contents={contents} />
+                );
+            case "freeResponse":
+                return (
+                    <input className="m-4" type="text" name="response" />
+                )
             default:
                 return(
                     <div></div>
