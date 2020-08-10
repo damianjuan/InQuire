@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, useState } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
 const QuestionContext = createContext({
     id: "",
@@ -17,21 +17,36 @@ function reducer(state, action) {
                     id: state.length * Math.random(),
                     question: action.question,
                     type: action.type,
-                    contents: action.Contents
+                    contents: action.contents
                 }
             ];
+        case "change":
+            return state.map((item, i) => {
+                if (i === 0) {
+                    if (action.type) {
+                        if (action.type === "freeResponse") {
+                            item.contents = ["Free Response"];
+                        } else {
+                            item.contents = [];
+                        }
+                        item.type = action.type;
+                    } else if (action.question) {
+                        item.question = action.question;
+                    } else if (action.choice) {
+                        item.contents[action.slot] = action.choice;
+                    }
+                }
+                return item;
+            });
         default:
             return state;
     }
 }
 
-function QuestionProvider({ value, ...props}) {
-    const [state, dispatch] = useReducer(reducer, []);
-    // console.log(state);
-    // console.log(dispatch);
-    // console.log("value", value);
+function QuestionProvider({ value = [{ id: "", question: "", type: "choose", contents: [] }], ...props}) {
+    const [state, dispatch] = useReducer(reducer, value);
 
-    return <Provider value={[value, dispatch]} {...props} />;
+    return <Provider value={[state, dispatch]} {...props} />;
 }
 
 function useQuestionContext() {
