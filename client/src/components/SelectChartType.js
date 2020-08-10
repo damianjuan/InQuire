@@ -1,0 +1,1 @@
+// checks the question type of each survey question and returns the appropriate chart component
