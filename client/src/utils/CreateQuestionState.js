@@ -17,14 +17,18 @@ function reducer(state, action) {
                     id: state.length * Math.random(),
                     question: action.question,
                     type: action.type,
-                    contents: action.Contents
+                    contents: action.contents
                 }
             ];
-            return state;
         case "change":
             return state.map((item, i) => {
                 if (i === 0) {
                     if (action.type) {
+                        if (action.type === "freeResponse") {
+                            item.contents = ["Free Response"];
+                        } else {
+                            item.contents = [];
+                        }
                         item.type = action.type;
                     } else if (action.question) {
                         item.question = action.question;

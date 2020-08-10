@@ -7,9 +7,8 @@ function CreateQuestion() {
     const typeRef = useRef();
     const [state, dispatch] = useQuestionContext();
     const CURRENT_QUESTION = state[0];
-    console.log(state, "----", CURRENT_QUESTION);
 
-    function testDiv(type) {
+    function chooseType(type) {
         switch (type) {
             case "multipleChoice":
             case "selectApply":
@@ -30,7 +29,7 @@ function CreateQuestion() {
     function addQuestion(e) {
         e.preventDefault();
 
-        if (CURRENT_QUESTION.question && CURRENT_QUESTION.contents[0] && CURRENT_QUESTION.contents[1]) {
+        if (CURRENT_QUESTION.question && CURRENT_QUESTION.contents[0]) {
             dispatch({
                 call: "add",
                 question: CURRENT_QUESTION.question,
@@ -66,7 +65,7 @@ function CreateQuestion() {
                     </select>
                 </label>
             </div>
-            {testDiv(CURRENT_QUESTION.type)}
+            {chooseType(CURRENT_QUESTION.type)}
             <button className="m-2 p-2 bg-yellow-500 rounded-full w-40 self-end" type="submit">Add Question</button>
         </form>
     );

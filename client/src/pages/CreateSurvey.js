@@ -1,7 +1,7 @@
 import React from "react";
 import CreateQuestion from "../components/CreateQuestion";
-import { QuestionProvider } from "../utils/CreateQuestionState";
 import StoredQuestions from "../components/StoredQuestions";
+import { QuestionProvider } from "../utils/CreateQuestionState";
 
 function CreateSurvey() {
 
@@ -14,8 +14,8 @@ function CreateSurvey() {
                 </label>
             </form>
             <QuestionProvider>
-                <StoredQuestions />
                 <CreateQuestion />
+                <StoredQuestions />
             </QuestionProvider>
         </main>
     )
