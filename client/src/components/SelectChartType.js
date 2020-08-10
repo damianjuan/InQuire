@@ -1,4 +1,8 @@
 import React from 'react';
+import BarGraph from './BarGraph';
+import PieGraph from './PieChart';
+import FreeResponse from './FreeResponse';
+import PieChart from './PieChart';
 
 // checks the question type of each survey question and returns the appropriate chart component
 //free response MVP-list results, icebox-pull keywords and then send to pie chart
@@ -7,26 +11,26 @@ import React from 'react';
 
 
 
-export default function SelectChartType({ type, id }) {
+export default function SelectChartType({ type }) {
     switch (type) {
         case 'multipleChoice':
             return (
-                <h1>multiple Choice Question id {id}</h1>
+                <PieChart />
             )
 
         case 'selectAll':
             return (
-                <h1>Select All Question id {id}</h1>
+                <BarGraph />
             )
 
         case 'free response':
             return (
-                <h1>Free Response id {id}</h1>
+                <FreeResponse />
             )
 
         default:
             return (
-                <h1>Invalid Question Type id {id}</h1>
+                <h1>Invalid Question Type</h1>
             )
     }
 };
