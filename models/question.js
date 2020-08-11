@@ -1,39 +1,52 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const SurveyQuestion = sequelize.define(
-    'SurveyQuestion',
+  const Question = sequelize.define(
+    'Question',
     {
       // survey_id: DataTypes.INTERGER,
-      survey_question: {
+      question_title: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
-      survey_type: {
+      question_type: {
         type: DataTypes.STRING,
         allowNull: false,
+        validation: {
+          len: [1]
+        }
+      },
+      choices: {
+        type: DataTypes.STRING,
+        allowNull: true,
         validation: {
           len: [1]
         }
       }
     }
   );
-  SurveyQuestion.associate = function (models) {
+  Question.associate = function (models) {
     // associations can be defined here
-    SurveyQuestion.belongsTo(models.SurveyTitle, {
+    Question.belongsTo(models.Survey, {
       onDelete: "cascade",
       foreignKey: {
         allowNull: false
       }
     });
-    SurveyQuestion.hasMany(models.SurveyResult, {
+    Question.hasMany(models.Answer, {
+      onDelete: "cascade",
+      foreignKey: {
+        allowNull: false
+      }
+    });
+    Question.hasMany(models.Result, {
       onDelete: "cascade",
       foreignKey: {
         allowNull: false
       }
     });
   };
-  return SurveyQuestion;
+  return Question;
 };
