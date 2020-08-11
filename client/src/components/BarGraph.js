@@ -13,7 +13,7 @@ const TEST_DATA = [
 export default function BarGraph() {
 
     return (
-        <>
+        <div className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg">
             <h1>BarGraph Example</h1>
             <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
                 <VictoryBar
@@ -23,6 +23,6 @@ export default function BarGraph() {
 
                 />
             </VictoryChart>
-        </>
+        </div>
     )
 };

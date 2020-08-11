@@ -49,7 +49,7 @@ export default function ViewResults() {
 
 
     return (
-        <main className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg">
+        <main className="mx-auto my-4 p-4 w-5/6 ">
             {
                 testData.map(res => (
                     <SelectChartType type={res.type} id={res.id} />
