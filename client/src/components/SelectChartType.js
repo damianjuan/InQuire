@@ -15,7 +15,7 @@ export default function SelectChartType({ type }) {
     switch (type) {
         case 'multipleChoice':
             return (
-                <PieChart />
+                <BarGraph />
             )
 
         case 'selectAll':

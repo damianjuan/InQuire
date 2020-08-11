@@ -33,14 +33,15 @@ const testData = [
         type: 'free response',
         answers: ['free response'],
         count: ['Great survey', 'Loved it!', 'Hope you finish in time...', 'Hurry Up!']
-    },
-    {
-        id: 4,
-        question: 'Test Invalid question type',
-        type: 'none',
-        answers: [],
-        count: []
     }
+    // ,
+    // {
+    //     id: 4,
+    //     question: 'Test Invalid question type',
+    //     type: 'none',
+    //     answers: [],
+    //     count: []
+    // }
 ];
 
 export default function ViewResults() {
@@ -48,7 +49,7 @@ export default function ViewResults() {
 
 
     return (
-        <main className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg">
+        <main className="mx-auto my-4 p-4 w-5/6 ">
             {
                 testData.map(res => (
                     <SelectChartType type={res.type} id={res.id} />
