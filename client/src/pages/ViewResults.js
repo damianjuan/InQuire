@@ -33,14 +33,15 @@ const testData = [
         type: 'free response',
         answers: ['free response'],
         count: ['Great survey', 'Loved it!', 'Hope you finish in time...', 'Hurry Up!']
-    },
-    {
-        id: 4,
-        question: 'Test Invalid question type',
-        type: 'none',
-        answers: [],
-        count: []
     }
+    // ,
+    // {
+    //     id: 4,
+    //     question: 'Test Invalid question type',
+    //     type: 'none',
+    //     answers: [],
+    //     count: []
+    // }
 ];
 
 export default function ViewResults() {
