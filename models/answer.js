@@ -1,21 +1,21 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const SurveyResult = sequelize.define(
-        'SurveyResult', {
-        survey_result: {
-            type: DataTypes.TEXT,
+    const Answer = sequelize.define(
+        'Answer', {
+        answer: {
+            type: DataTypes.STRING,
             allowNull: false,
         }
     }
     );
-    SurveyResult.associate = function (models) {
+    Answer.associate = function (models) {
         // associations can be defined here
-        SurveyResult.belongsTo(models.SurveyQuestion, {
+        Answer.belongsTo(models.Question, {
             onDelete: "cascade",
             foreignKey: {
                 allowNull: false
             }
         });
     };
-    return SurveyResult;
+    return Answer;
 };

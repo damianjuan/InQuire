@@ -1,10 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const SurveyTitle = sequelize.define(
-        'SurveyTitle',
+    const Survey = sequelize.define(
+        'Survey',
         {
             // user_id: DataTypes.INTEGER,
-            survey_title: {
+            survey_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
                 }
             },
             survey_uuid: {
-                type: DataTypes.STRING,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
+                primaryKey: true,
                 allowNull: false,
                 validate: {
                     len: [1]
@@ -20,19 +22,19 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     );
-    SurveyTitle.associate = function (models) {
+    Survey.associate = function (models) {
         // associations can be defined here
-        SurveyTitle.belongsTo(models.User, {
+        Survey.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
         });
-        SurveyTitle.hasMany(models.SurveyQuestion, {
+        Survey.hasMany(models.Question, {
             onDelete: "cascade",
             foreignKey: {
                 allowNull: false
             }
         });
     };
-    return SurveyTitle;
+    return Survey;
 };
