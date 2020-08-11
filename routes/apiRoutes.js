@@ -28,57 +28,57 @@ apiRoutes.get("/user_data", (req, res) => {
         });
     };
 });
-
-apiRoutes.delete('/surveys/delete/:id', async (req, res) => {
-    const options = {
-        where: {
-            id: req.params.id
-        }
-    };
-    const deleltebySurveyId = await db.Surveys.destroy(options);
-    res.json(deleltebySurveyId);
-});
-
-apiRoutes.post('/surveys/create', async (req, res) => {
-    const dbSurveys = await db.Surveys.create({
+apiRoutes.post('/create-survey', async (req, res) => {
+    const dbTitle = await db.SurveyTitle.create({
         survey_title: req.body.survey_title,
-        UserId: req.user.id
+        // UUID() needs to be added
+        survey_uuid: req.user.id
     });
-    const dbQuestions = await db.Survey_Questions.create({
+    const dbQuestions = await db.SurveyQuestion.create({
         survey_questions: req.body.survey_questions,
-        SurveyId: dbSurveys.id
+        survey_type: req.body.survey_type
     });
-    res.json(dbSurveys);
+    res.json(dbTitle);
     res.json(dbQuestions);
 });
 
-apiRoutes.get('/surveys/take/:id', async (req, res) => {
+apiRoutes.delete('/delete-survey/:id', async (req, res) => {
     const options = {
         where: {
-            id: req.params.id
-        },
-        include: [db.Survey_Questions]
+            survey_uuid: req.params.id
+        }
     };
-    const takebySurveyId = await db.Surveys.findAll(options);
+    const deleltebySurveyId = await db.SurveyTitle.destroy(options);
+    res.json(deleltebySurveyId);
+});
+
+
+apiRoutes.get('/take-survey/:id', async (req, res) => {
+    const options = {
+        where: {
+            survey_uuid: req.params.id
+        },
+        include: [db.SurveyQuestion]
+    };
+    const takebySurveyId = await db.SurveyTitle.findAll(options);
     res.json(takebySurveyId);
 });
 
-apiRoutes.post('/surveys/result', async (req, res) => {
-    const dbResult = await db.Survey_Results.create({
+apiRoutes.post('/results', async (req, res) => {
+    const dbResult = await db.SurveyResult.create({
         survey_result: req.body.survey_result,
-        SurveyQuestionId: req.body.SurveyQuestionId
     });
     res.json(dbResult);
 });
 
-apiRoutes.get('/surveys/result/:id', async (req, res) => {
+apiRoutes.get('/results/:id', async (req, res) => {
     const options = {
         where: {
-            id: req.params.id
+            survey_uuid: req.params.id
         },
-        include: [db.Survey_Questions, db.Survey_Results]
+        include: [db.SurveyQuestion, db.SurveyResult]
     };
-    const getResultbyId = await db.Surveys.findAll(options);
+    const getResultbyId = await db.SurveyTitle.findAll(options);
     res.json(getResultbyId);
 });
 

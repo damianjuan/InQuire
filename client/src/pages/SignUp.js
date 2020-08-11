@@ -1,17 +1,38 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import API from "../utils/API"
+
 
 function SignUp() {
+
+    function submitHandler(event) {
+        event.preventDefault();
+        API.signUp({
+            email: event.target.email.value,
+            password: event.target.password.value
+        })
+        // .then(() => {
+        //     window.location.replace("/");
+        // })
+
+    }
+
+    function backtoHome(event) {
+        event.preventDefault();
+        window.location.replace("/");
+    }
+
     return (
         <main className="mx-auto my-4 p-8 w-5/6 bg-gray-300 text-xl">
-            <div>
-                <input className="my-2 w-3/6" type="text" name="prompt" placeholder="Email" />
-            </div>
-            <div>
-                <input className="my-2 w-3/6" type="text" name="prompt" placeholder="Password" />
-            </div>
-            <div>
-                <Link to={process.env.PUBLIC_URL + '/'}>Sign Up</Link>
+            <div className="signUpWrap">
+                <form onSubmit={submitHandler}>
+                    <input className="my-2 w-3/6" type="text" name="email" placeholder="Email" />
+                    <br></br>
+                    <input className="my-2 w-3/6" type="password" name="password" placeholder="Password" />
+                    <br></br>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <button onClick={backtoHome}>Back</button>
             </div>
         </main>
     );
