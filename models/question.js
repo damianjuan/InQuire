@@ -41,12 +41,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     });
-    Question.hasMany(models.Result, {
-      onDelete: "cascade",
-      foreignKey: {
-        allowNull: false
-      }
-    });
   };
   return Question;
 };
