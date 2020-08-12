@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
         answer: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        count: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         }
     }
     );
