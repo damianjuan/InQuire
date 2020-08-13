@@ -1,6 +1,7 @@
 import React from "react";
 import CreateQuestion from "../components/CreateQuestion";
 import StoredQuestions from "../components/StoredQuestions";
+import SubmitSurvey from "../components/SubmitSurvey";
 import { QuestionProvider } from "../utils/CreateQuestionState";
 
 function CreateSurvey() {
@@ -16,10 +17,8 @@ function CreateSurvey() {
             <QuestionProvider>
                 <CreateQuestion />
                 <StoredQuestions />
+                <SubmitSurvey />
             </QuestionProvider>
-            <div className="flex">
-                <button className="mx-auto p-2 bg-yellow-500 rounded-full w-40" type="submit">Publish Survey</button>
-            </div>
         </main>
     )
 }

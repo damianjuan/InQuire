@@ -10,7 +10,7 @@ function SignUp() {
         API.signUp({
             email: event.target.email.value,
             password: event.target.password.value
-        })
+        });
         // .then(() => {
         //     window.location.replace("/");
         // })

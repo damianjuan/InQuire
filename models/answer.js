@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         count: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         }
     }
     );

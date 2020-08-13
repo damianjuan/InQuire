@@ -28,18 +28,30 @@ apiRoutes.get("/user_data", (req, res) => {
         });
     };
 });
+
 apiRoutes.post('/create-survey', async (req, res) => {
-    const dbTitle = await db.SurveyTitle.create({
-        survey_title: req.body.survey_title,
-        // UUID() needs to be added
-        survey_uuid: req.user.id
-    });
-    const dbQuestions = await db.SurveyQuestion.create({
-        survey_questions: req.body.survey_questions,
-        survey_type: req.body.survey_type
-    });
-    res.json(dbTitle);
-    res.json(dbQuestions);
+    console.log("survey --- ", req.body);
+    // const dbTitle = await db.Survey.create(req.body);
+    // res.json(dbTitle);
+    res.end();
+});
+apiRoutes.post('/create-survey-question', async (req, res) => {
+    console.log("question --- ", req.body);
+    // const dbQuestion = await db.Question.create({
+    //     question_title: req.body.question_title,
+    //     question_type: req.body.question_type,
+    //     SurveySurveyUuid: req.body.survey_uuid
+    // });
+    // res.json(dbQuestion);
+    res.end();
+});
+apiRoutes.post('/create-question-answer', async (req, res) => {
+    console.log("answer --- ", req.body);
+    // const dbAnswers = await db.Answer.create({
+    //     answer: req.body.answer
+    // });
+    // res.json(dbAnswers);
+    res.end();
 });
 
 apiRoutes.delete('/delete-survey/:id', async (req, res) => {

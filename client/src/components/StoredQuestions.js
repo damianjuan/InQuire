@@ -5,10 +5,8 @@ import { useQuestionContext } from "../utils/CreateQuestionState";
 
 function StoredQuestions() {
     const [state, dispatch] = useQuestionContext();
-    console.log("state ---- ", state);
 
     function displayType({ id, type, contents }) {
-        console.log("----", type, "----", contents);
 
         switch (type) {
             case "multipleChoice":
