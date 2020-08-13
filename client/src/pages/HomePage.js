@@ -1,8 +1,8 @@
 import React from "react";
 
-//need to get username from session
+//need to get username from session just test data for now
 const userName = "exampleuser@test.com";
-// need to get list of survey titles and id from database
+// need to get list of survey titles and id from database just test data for now
 const userSurveys = [
     {
         id: 1,
