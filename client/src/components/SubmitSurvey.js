@@ -5,19 +5,26 @@ import { v4 as uuidv4 } from 'uuid';
 
 function SubmitSurvey() {
     const [state, dispatch] = useQuestionContext();
-    console.log("state ---- ", state);
+            console.log("state ---- ", state);
     const uuid = uuidv4();
 
     function submitClick(e) {
         e.preventDefault();
 
         if (state.length > 1) {
-            const questions = [];
-            state.map((item) => {
-                item.SurveySurveyUuid = uuid;
-                console.log("item ---- ", item);
+            let answers = [];
+            const questions = state.map((questionItem) => {
+                questionItem.SurveySurveyUuid = uuid;
+                delete questionItem.id;
+                questionItem.contents.map((answer) => {
+                    answers.push({answer})
+                })
+                delete questionItem.contents;
+                return questionItem;
             });
+            console.log("answers ---- ", answers);
 
+            questions.shift();
             API.publish({
                 survey_name: "test",
                 survey_uuid: uuid

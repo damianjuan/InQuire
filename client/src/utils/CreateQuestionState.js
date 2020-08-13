@@ -2,8 +2,8 @@ import React, { createContext, useReducer, useContext } from "react";
 
 const QuestionContext = createContext({
     id: "",
-    question: "",
-    type: "",
+    question_title: "",
+    question_type: "",
     contents: []
 });
 const { Provider } = QuestionContext;
@@ -15,23 +15,23 @@ function reducer(state, action) {
                 ...state,
                 {
                     id: state.length * Math.random(),
-                    question: action.question,
-                    type: action.type,
+                    question_title: action.question_title,
+                    question_type: action.question_type,
                     contents: action.contents
                 }
             ];
         case "change":
             return state.map((item, i) => {
                 if (i === 0) {
-                    if (action.type) {
-                        if (action.type === "freeResponse") {
+                    if (action.question_type) {
+                        if (action.question_type === "freeResponse") {
                             item.contents = ["Free Response"];
                         } else {
                             item.contents = [];
                         }
-                        item.type = action.type;
-                    } else if (action.question) {
-                        item.question = action.question;
+                        item.question_type = action.question_type;
+                    } else if (action.question_title) {
+                        item.question_title = action.question_title;
                     } else if (action.choice) {
                         item.contents[action.slot] = action.choice;
                     }
@@ -43,7 +43,7 @@ function reducer(state, action) {
     }
 }
 
-function QuestionProvider({ value = [{ id: "", question: "", type: "choose", contents: [] }], ...props}) {
+function QuestionProvider({ value = [{ id: "", question_title: "", question_type: "choose", contents: [] }], ...props}) {
     const [state, dispatch] = useReducer(reducer, value);
 
     return <Provider value={[state, dispatch]} {...props} />;

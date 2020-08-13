@@ -17,14 +17,14 @@ module.exports = (sequelize, DataTypes) => {
         validation: {
           len: [1]
         }
-      },
-      choices: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        validation: {
-          len: [1]
-        }
-      }
+      }//,
+    //   choices: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true,
+    //     validation: {
+    //       len: [1]
+    //     }
+    //   }
     }
   );
   Question.associate = function (models) {
