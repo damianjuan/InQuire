@@ -18,7 +18,7 @@ apiRoutes.post("/login", passport.authenticate("local"), (req, res) => {
     res.json(req.body);
 });
 // Route for getting some data about our user to be used client side
-apiRoutes.get("/user_data", (req, res) => {
+apiRoutes.get("/userdata", (req, res) => {
     if (!req.user) {
         res.json({});
     } else {
@@ -28,61 +28,70 @@ apiRoutes.get("/user_data", (req, res) => {
         });
     };
 });
+
+//[post]
+//1. create survey
 apiRoutes.post('/create-survey', async (req, res) => {
-    const dbTitle = await db.SurveyTitle.create({
-        survey_title: req.body.survey_title,
-        // UUID() needs to be added
-        survey_uuid: req.user.id
+    const dbSurveyName = await db.Survey.create({
+        survey_name: req.body.survey_name,
     });
-    const dbQuestions = await db.SurveyQuestion.create({
-        survey_questions: req.body.survey_questions,
-        survey_type: req.body.survey_type
+    const dbQuestionInfo = await db.Question.create({
+        question_title: req.body.question_title,
+        question_type: req.body.question_type,
+        choices: req.body.choices
     });
-    res.json(dbTitle);
-    res.json(dbQuestions);
+    res.json(dbSurveyName);
+    res.json(dbQuestionInfo);
+});
+//2. take survey
+apiRoutes.post('/take-survey', async (req, res) => {
+    const dbAnswer = await db.Answer.create({
+        answer: req.body.answer,
+        count: req.body.count
+    });
+    res.json(dbAnswer);
 });
 
-apiRoutes.delete('/delete-survey/:id', async (req, res) => {
+//[delete]
+//1. delete survey
+
+apiRoutes.delete('/delete/:id', async (req, res) => {
     const options = {
         where: {
             survey_uuid: req.params.id
         }
     };
-    const deleltebySurveyId = await db.SurveyTitle.destroy(options);
-    res.json(deleltebySurveyId);
+    const delelteSurvey = await db.Survey.destroy(options);
+    res.json(delelteSurvey);
 });
 
 
+//[get]
+//1. get survey & question info for rendering take-survey page.
 apiRoutes.get('/take-survey/:id', async (req, res) => {
     const options = {
         where: {
             survey_uuid: req.params.id
         },
-        include: [db.SurveyQuestion]
+        include: [db.Question]
     };
-    const takebySurveyId = await db.SurveyTitle.findAll(options);
-    res.json(takebySurveyId);
+    const takeSurvey = await db.Survey.findAll(options);
+    res.json(takeSurvey);
 });
 
-apiRoutes.post('/results', async (req, res) => {
-    const dbResult = await db.SurveyResult.create({
-        survey_result: req.body.survey_result,
-    });
-    res.json(dbResult);
-});
-
+//2. get answer info for rendering results-survey page
 apiRoutes.get('/results/:id', async (req, res) => {
     const options = {
         where: {
             survey_uuid: req.params.id
         },
-        include: [db.SurveyQuestion, db.SurveyResult]
+        include: [db.Question, db.Answer]
     };
-    const getResultbyId = await db.SurveyTitle.findAll(options);
-    res.json(getResultbyId);
+    const getResult = await db.Survey.findAll(options);
+    res.json(getResult);
 });
 
-apiRoutes.post
+
 
 module.exports = apiRoutes;
 
