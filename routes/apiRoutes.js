@@ -38,12 +38,8 @@ apiRoutes.post('/create-survey-question', async (req, res) => {
     res.json(dbQuestions);
 });
 apiRoutes.post('/create-question-answer', async (req, res) => {
-    // console.log("answer --- ", req.body);
-    // const dbAnswers = await db.Answer.create({
-    //     answer: req.body.answer
-    // });
-    // res.json(dbAnswers);
-    res.end();
+    const dbAnswers = await db.Answer.bulkCreate(req.body);
+    res.json(dbAnswers);
 });
 
 apiRoutes.get('/get-survey-questions/:uuid', async (req, res) => {
