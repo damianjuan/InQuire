@@ -13,7 +13,7 @@ export default {
         await axios.post("/api/create-survey", survey);
         await axios.post("/api/create-survey-question", questions);
 
-        const { data } = await axios.get(`/api/get-survey-questions/${survey.survey_uuid}`);
+        const { data } = await axios.get(`/api/get-survey-questions/${survey.uuid}`);
         console.log("data", data);
         console.log("answers", answers);
         answers.map((item) => {

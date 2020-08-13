@@ -22,19 +22,6 @@ function reducer(state, action) {
             ];
         case "change":
             console.log(state, action);
-            // return state;
-            // switch (action.type) {
-            //     case "selectType":
-            //         console.log("hi");
-            //         state[0].question_type = action.question_type;
-            //         console.log(state);
-            //         return state;
-            //     case "answer":
-            //         state[0].contents[action.slot] = action.choice;
-            //         return state;
-            //     default:
-            //         return state;
-            // }
             return state.map((item, i) => {
                 if (i === 0) {
                     if (action.type === "selectType") {

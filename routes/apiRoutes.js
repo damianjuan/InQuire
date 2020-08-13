@@ -45,7 +45,7 @@ apiRoutes.post('/create-question-answer', async (req, res) => {
 apiRoutes.get('/get-survey-questions/:uuid', async (req, res) => {
     const surveyQuestions = await db.Question.findAll({
         where: {
-            SurveySurveyUuid: req.params.uuid
+            SurveyUuid: req.params.uuid
         }
     });
     res.send(surveyQuestions);
@@ -57,7 +57,7 @@ apiRoutes.get('/get-survey-questions/:uuid', async (req, res) => {
 apiRoutes.delete('/delete/:id', async (req, res) => {
     const options = {
         where: {
-            survey_uuid: req.params.id
+            uuid: req.params.id
         }
     };
     const delelteSurvey = await db.Survey.destroy(options);
@@ -70,7 +70,7 @@ apiRoutes.delete('/delete/:id', async (req, res) => {
 apiRoutes.get('/take-survey/:id', async (req, res) => {
     const options = {
         where: {
-            survey_uuid: req.params.id
+            uuid: req.params.id
         },
         include: [db.Question]
     };
@@ -82,7 +82,7 @@ apiRoutes.get('/take-survey/:id', async (req, res) => {
 apiRoutes.get('/results/:id', async (req, res) => {
     const options = {
         where: {
-            survey_uuid: req.params.id
+            uuid: req.params.id
         },
         include: [db.Question, db.Answer]
     };
