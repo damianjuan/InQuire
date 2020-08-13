@@ -25,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     Survey.associate = function (models) {
         // associations can be defined here
         Survey.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
+            // foreignKey: {
+            //     allowNull: false
+            // }
         });
         Survey.hasMany(models.Question, {
             onDelete: "cascade",

@@ -5,12 +5,10 @@ import { useQuestionContext } from "../utils/CreateQuestionState";
 
 function StoredQuestions() {
     const [state, dispatch] = useQuestionContext();
-    console.log("state ---- ", state);
 
-    function displayType({ id, type, contents }) {
-        console.log("----", type, "----", contents);
+    function displayType({ id, question_type, contents }) {
 
-        switch (type) {
+        switch (question_type) {
             case "multipleChoice":
                 return (
                     <DisplayMultipleChoice id={id} contents={contents} />
@@ -35,7 +33,7 @@ function StoredQuestions() {
             {state.map((item, i) => (
                 <li className="flex flex-col flex-1 mb-2" key={item.id}>
                     <label className="flex flex-col flex-1 text-xl my-2">
-                        {i > 0 ? `${i}:  ` : `${state.length}:  `} {item.question}
+                        {i > 0 ? `${i}:  ` : `${state.length}:  `} {item.question_title}
                         {displayType(item)}
                     </label>
                 </li>

@@ -29,27 +29,26 @@ apiRoutes.get("/userdata", (req, res) => {
     };
 });
 
-//[post]
-//1. create survey
 apiRoutes.post('/create-survey', async (req, res) => {
-    const dbSurveyName = await db.Survey.create({
-        survey_name: req.body.survey_name,
-    });
-    const dbQuestionInfo = await db.Question.create({
-        question_title: req.body.question_title,
-        question_type: req.body.question_type,
-        choices: req.body.choices
-    });
-    res.json(dbSurveyName);
-    res.json(dbQuestionInfo);
+    const dbTitle = await db.Survey.create(req.body);
+    res.json(dbTitle);
 });
-//2. take survey
-apiRoutes.post('/take-survey', async (req, res) => {
-    const dbAnswer = await db.Answer.create({
-        answer: req.body.answer,
-        count: req.body.count
+apiRoutes.post('/create-survey-question', async (req, res) => {
+    const dbQuestions = await db.Question.bulkCreate(req.body);
+    res.json(dbQuestions);
+});
+apiRoutes.post('/create-question-answer', async (req, res) => {
+    const dbAnswers = await db.Answer.bulkCreate(req.body);
+    res.json(dbAnswers);
+});
+
+apiRoutes.get('/get-survey-questions/:uuid', async (req, res) => {
+    const surveyQuestions = await db.Question.findAll({
+        where: {
+            SurveySurveyUuid: req.params.uuid
+        }
     });
-    res.json(dbAnswer);
+    res.send(surveyQuestions);
 });
 
 //[delete]
