@@ -14,7 +14,7 @@ function SubmitSurvey() {
         if (state.length > 0) {
             let answers = [];
             const questions = state.map((questionItem, i) => {
-                questionItem.SurveySurveyUuid = uuid;
+                questionItem.SurveyUuid = uuid;
                 questionItem.contents.map((answer) => {
                     if (answer) {
                         const item = {answer};
@@ -29,7 +29,7 @@ function SubmitSurvey() {
 
             API.publish({
                 survey_name: "test",
-                survey_uuid: uuid
+                uuid: uuid
             },
                 questions,
                 answers

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
                     len: [1]
                 }
             },
-            survey_uuid: {
+            uuid: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
