@@ -14,8 +14,11 @@ export default {
         await axios.post("/api/create-survey-question", questions);
 
         const { data } = await axios.get(`/api/get-survey-questions/${survey.survey_uuid}`);
+        console.log("data", data);
+        console.log("answers", answers);
         answers.map((item) => {
-            item.QuestionId = data[item.QuestionId - 1].id;
+            console.log(item);
+            item.QuestionId = data[item.QuestionId].id;
         });
         await axios.post("/api/create-question-answer", answers);
 

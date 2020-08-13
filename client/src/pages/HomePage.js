@@ -18,7 +18,7 @@ export default function HomePage() {
 
 
     return (
-        <main className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg">
+        <main className="flex flex-col mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg">
             <header className="bg-green-300 text-center text-4xl p-4 rounded-lg" >
                 Welcome {userName}
             </header>

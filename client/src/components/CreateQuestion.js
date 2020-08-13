@@ -7,9 +7,10 @@ function CreateQuestion() {
     const typeRef = useRef();
     const [state, dispatch] = useQuestionContext();
     const CURRENT_QUESTION = state[0];
+    console.log("state ---- ", state);
 
-    function chooseType(type) {
-        switch (type) {
+    function chooseType(questionType) {
+        switch (questionType) {
             case "multipleChoice":
             case "selectApply":
                 return (
@@ -53,11 +54,11 @@ function CreateQuestion() {
             <div className="flex flex-col flex-1">
                 <label className="flex-1 text-xl mx-auto">
                     Input Question:
-                    <input className="my-2 w-full" type="text" name="question" ref={questionRef} onChange={(e) => dispatch({call: "change", question_title: e.target.value})} />
+                    <input className="my-2 w-full" type="text" name="question" ref={questionRef} onChange={(e) => dispatch({call: "change", question_title: e.target.value, type: e.target.name})} />
                 </label>
                 <label className="flex-1 text-xl mx-auto">
                     Select Question Type: 
-                    <select className="my-2" name="type" ref={typeRef} onChange={(e) => dispatch({call: "change", question_type: e.target.value})}>
+                    <select className="my-2" name="selectType" ref={typeRef} onChange={(e) => dispatch({call: "change", question_type: e.target.value, type: e.target.name})}>
                         <option value="choose">Choose One</option>
                         <option value="multipleChoice">Multiple Choice</option>
                         <option value="selectApply">Select All That Apply</option>
