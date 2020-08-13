@@ -9,22 +9,24 @@ function SubmitSurvey() {
 
     function submitClick(e) {
         e.preventDefault();
+        state.shift();
 
-        if (state.length > 1) {
+        if (state.length > 0) {
             let answers = [];
             const questions = state.map((questionItem, i) => {
                 questionItem.SurveySurveyUuid = uuid;
                 questionItem.contents.map((answer) => {
-                    const item = {answer};
-                    item.QuestionId = i;
-                    answers.push(item)
+                    if (answer) {
+                        const item = {answer};
+                        item.QuestionId = i;
+                        answers.push(item);
+                    }
                 });
                 delete questionItem.id;
                 delete questionItem.contents;
                 return questionItem;
             });
 
-            questions.shift();
             API.publish({
                 survey_name: "test",
                 survey_uuid: uuid

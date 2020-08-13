@@ -21,19 +21,29 @@ function reducer(state, action) {
                 }
             ];
         case "change":
+            console.log(state, action);
+            // return state;
+            // switch (action.type) {
+            //     case "selectType":
+            //         console.log("hi");
+            //         state[0].question_type = action.question_type;
+            //         console.log(state);
+            //         return state;
+            //     case "answer":
+            //         state[0].contents[action.slot] = action.choice;
+            //         return state;
+            //     default:
+            //         return state;
+            // }
             return state.map((item, i) => {
                 if (i === 0) {
-                    if (action.question_type) {
-                        if (action.question_type === "freeResponse") {
-                            item.contents = ["Free Response"];
-                        } else {
-                            item.contents = [];
-                        }
+                    if (action.type === "selectType") {
+                        action.question_type === "freeResponse" ? item.contents = ["Free Response"] : item.contents = [];
                         item.question_type = action.question_type;
-                    } else if (action.question_title) {
+                    } else if (action.type === "question") {
                         item.question_title = action.question_title;
-                    } else if (action.choice) {
-                        item.contents[action.slot] = action.choice;
+                    } else if (action.type === "answer") {
+                        action.choice === "" ? item.contents[action.slot] = undefined : item.contents[action.slot] = action.choice;
                     }
                 }
                 return item;
