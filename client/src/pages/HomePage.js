@@ -28,11 +28,11 @@ export default function HomePage() {
                     {userSurveys.map(({ title, id }) => (
                         <li className="text-center">
                             <p className=" text-4xl p-4 rounded-lg">{title}</p>
-                            <button onclick="link to take survey" id="takeBtn" className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
+                            <button onClick="link to take survey" id="takeBtn" className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
                             >Take</button>
-                            <button onclick="link to view results here" id="result-Btn" className="text-center  m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
+                            <button onClick="link to view results here" id="result-Btn" className="text-center  m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
                             >Results</button>
-                            <button id="delete-Btn" data-surveyID={id} className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end">Delete</button>
+                            <button id="delete-Btn" data-surveyid={id} className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end">Delete</button>
                         </li>
                     ))}
                 </ul>

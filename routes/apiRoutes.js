@@ -42,6 +42,18 @@ apiRoutes.post('/create-question-answer', async (req, res) => {
     res.json(dbAnswers);
 });
 
+apiRoutes.get('/get-survey/:uuid', async (req, res) => {
+    const survey = await db.Survey.findAll({
+        where: {
+            uuid: req.params.uuid
+        },
+        include: [{
+            model: db.Question,
+            include: db.Answer
+        }]
+    });
+res.send(survey);
+});
 apiRoutes.get('/get-survey-questions/:uuid', async (req, res) => {
     const surveyQuestions = await db.Question.findAll({
         where: {
@@ -49,6 +61,14 @@ apiRoutes.get('/get-survey-questions/:uuid', async (req, res) => {
         }
     });
     res.send(surveyQuestions);
+});
+apiRoutes.get('/get-question-answers/:id', async (req, res) => {
+    const questionAnswers = await db.Answer.findAll({
+        where: {
+            QuestionId: req.params.id
+        }
+    });
+    res.send(questionAnswers);
 });
 
 //[delete]
