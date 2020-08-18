@@ -7,10 +7,9 @@ function CreateMultiple() {
     function handleFieldChange(e) {
         console.log(e.target);
         dispatch({
-            call: "change",
+            call: "changeAnswer",
             slot: parseInt(e.target.id),
-            choice: e.target.value,
-            type: e.target.name
+            answer: e.target.value
         });
     }
 
@@ -19,19 +18,19 @@ function CreateMultiple() {
             Answer Choices:
             <label className="">
                 1.
-                <input className="ml-4 my-2 w-auto" type="text" name="answer" id="0" onChange={handleFieldChange} />
+                <input className="ml-4 my-2 w-11/12" type="text" id="0" onChange={handleFieldChange} />
             </label>
             <label className="">
                 2.
-                <input className="ml-4 my-2 w-auto" type="text" name="answer" id="1" onChange={handleFieldChange} />
+                <input className="ml-4 my-2 w-11/12" type="text" id="1" onChange={handleFieldChange} />
             </label>
             <label className="">
                 3.
-                <input className="ml-4 my-2 w-auto" type="text" name="answer" id="2" onChange={handleFieldChange} />
+                <input className="ml-4 my-2 w-11/12" type="text" id="2" onChange={handleFieldChange} />
             </label>
             <label className="">
                 4.
-                <input className="ml-4 my-2 w-auto" type="text" name="answer" id="3" onChange={handleFieldChange} />
+                <input className="ml-4 my-2 w-11/12" type="text" id="3" onChange={handleFieldChange} />
             </label>
         </div>
     );

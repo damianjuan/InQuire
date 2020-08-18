@@ -9,11 +9,10 @@ function SubmitSurvey() {
 
     function submitClick(e) {
         e.preventDefault();
-        state.shift();
 
-        if (state.length > 0) {
+        if (state.survey_title && state.questions.length > 0) {
             let answers = [];
-            const questions = state.map((questionItem, i) => {
+            const questions = state.questions.map((questionItem, i) => {
                 questionItem.SurveyUuid = uuid;
                 questionItem.contents.map((answer) => {
                     if (answer) {
@@ -28,14 +27,14 @@ function SubmitSurvey() {
             });
 
             API.publish({
-                survey_name: "test",
+                survey_name: state.survey_title,
                 uuid: uuid
             },
                 questions,
                 answers
             );
         } else {
-            console.error("Add at least one question!");
+            !state.survey_title ? console.error("Please title the survey!") : console.error("Add at least one question!");
         }
     }
 
