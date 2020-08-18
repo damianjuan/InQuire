@@ -1,46 +1,82 @@
 import React, { createContext, useReducer, useContext } from "react";
 
 const QuestionContext = createContext({
-    id: "",
-    question_title: "",
-    question_type: "",
-    contents: []
+    survey_title: "",
+    current_question: {
+        question_title: "",
+        question_type: "",
+        contents: []
+    },
+    questions: []
 });
 const { Provider } = QuestionContext;
 
 function reducer(state, action) {
     switch (action.call) {
-        case "add":
-            return [
-                ...state,
-                {
-                    id: state.length * Math.random(),
-                    question_title: action.question_title,
-                    question_type: action.question_type,
-                    contents: action.contents
-                }
-            ];
-        case "change":
-            console.log(state, action);
-            return state.map((item, i) => {
-                if (i === 0) {
-                    if (action.type === "selectType") {
-                        action.question_type === "freeResponse" ? item.contents = ["Free Response"] : item.contents = [];
-                        item.question_type = action.question_type;
-                    } else if (action.type === "question") {
-                        item.question_title = action.question_title;
-                    } else if (action.type === "answer") {
-                        action.choice === "" ? item.contents[action.slot] = undefined : item.contents[action.slot] = action.choice;
-                    }
-                }
-                return item;
+        case "changeSurveyTitle":
+            return Object.assign({}, state, {
+                survey_title: action.survey_title
             });
+        case "changeType":
+            if (action.question_type === "freeResponse") {
+                return Object.assign({}, state, {
+                    current_question: {
+                        question_title: state.current_question.question_title,
+                        question_type: action.question_type,
+                        contents: ["Free Response"]
+                    }
+                })
+            } else {
+                return Object.assign({}, state, {
+                    current_question: {
+                        question_title: state.current_question.question_title,
+                        question_type: action.question_type,
+                        contents: []
+                    }
+                });
+            }
+        case "changeQuestion":
+            return Object.assign({}, state, {
+                current_question: {
+                    question_title: action.question_title,
+                    question_type: state.current_question.question_type,
+                    contents: state.current_question.contents
+                }
+            });
+        case "changeAnswer":
+            const contentsArr = [...state.current_question.contents];
+            contentsArr[action.slot] = action.answer;
+            console.log(contentsArr);
+            return Object.assign({}, state, {
+                current_question: {
+                    question_title: state.current_question.question_title,
+                    question_type: state.current_question.question_type,
+                    contents: contentsArr
+                }
+            });
+        case "add":
+            return Object.assign({}, state, {
+                current_question: {
+                    question_title: "",
+                    question_type: "choose",
+                    contents: []
+                },
+                questions: [
+                    ...state.questions,
+                    {
+                        id: state.questions.length * Math.random(),
+                        question_title: action.question_title,
+                        question_type: action.question_type,
+                        contents: action.contents
+                    }
+                ]
+            })
         default:
             return state;
     }
 }
 
-function QuestionProvider({ value = [{ id: "", question_title: "", question_type: "choose", contents: [] }], ...props}) {
+function QuestionProvider({ value = { survey_title: "", current_question: { question_title: "", question_type: "choose", contents: [] }, questions: [] }, ...props}) {
     const [state, dispatch] = useReducer(reducer, value);
 
     return <Provider value={[state, dispatch]} {...props} />;

@@ -30,10 +30,10 @@ function StoredQuestions() {
 
     return (
         <ul className="flex flex-col p-2 mx-4">
-            {state.map((item, i) => (
-                <li className="flex flex-col flex-1 mb-2" key={item.id}>
+            {state.questions.map((item, i) => (
+                <li className="flex flex-col flex-1 mb-2" key={i} name={item.id}>
                     <label className="flex flex-col flex-1 text-xl my-2">
-                        {i > 0 ? `${i}:  ` : `${state.length}:  `} {item.question_title}
+                        {i + 1}:  {item.question_title}
                         {displayType(item)}
                     </label>
                 </li>
