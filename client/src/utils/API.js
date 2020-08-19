@@ -26,5 +26,11 @@ export default {
         const { data } = await axios.get(`/api/get-survey/${uuid}`);
 
         return data[0];
+    },
+
+    getUserSurveys: async function (userId) {
+        const { data } = await axios.get(`/api/get-user-surveys/${userId}`);
+
+        return data;
     }
 };

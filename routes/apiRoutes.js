@@ -71,6 +71,18 @@ apiRoutes.get('/get-question-answers/:id', async (req, res) => {
     res.send(questionAnswers);
 });
 
+apiRoutes.get('/get-user-surveys/:userId', async (req, res) => {
+    const surveyList = await db.Survey.findAll({
+        where: {
+            userId: req.params.userId
+        },
+        include: [{
+            model: db.Question,
+            include: db.Answer
+        }]
+    });
+});
+
 //[delete]
 //1. delete survey
 
