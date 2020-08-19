@@ -83,6 +83,17 @@ apiRoutes.get('/get-user-surveys/:userId', async (req, res) => {
     });
 });
 
+apiRoutes.put('/increment-answers', async (req, res) => {
+    req.body.map((ans) => {
+        db.Answer.increment("count", {
+            where: {
+                id: ans
+            }
+        });
+    });
+    res.end();
+});
+
 //[delete]
 //1. delete survey
 
