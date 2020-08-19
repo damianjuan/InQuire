@@ -46,7 +46,6 @@ function reducer(state, action) {
         case "changeAnswer":
             const contentsArr = [...state.current_question.contents];
             contentsArr[action.slot] = action.answer;
-            console.log(contentsArr);
             return Object.assign({}, state, {
                 current_question: {
                     question_title: state.current_question.question_title,
