@@ -32,5 +32,11 @@ export default {
         const { data } = await axios.get(`/api/get-user-surveys/${userId}`);
 
         return data;
+    },
+
+    submitResults: async function (answerArr) {
+        await axios.put("/api/increment-answers", answerArr);
+
+        return console.log("Answers Submitted!");
     }
 };
