@@ -2,6 +2,7 @@ const Router = require('express').Router;
 const db = require('../models');
 const passport = require('../config/passport');
 const apiRoutes = Router();
+const isAuthenticated = require('../config/middleware/isAuthenticated');
 
 // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
 // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
@@ -16,7 +17,17 @@ apiRoutes.post('/signup', async (req, res) => {
 apiRoutes.post('/login', passport.authenticate('local'), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json(req.body);
+
 });
+
+apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
+    const user = req.user ? req.user : null;
+    console.log("user");
+    res.status(200).json({
+        user: user,
+    });
+});
+
 // Route for getting some data about our user to be used client side
 apiRoutes.get('/userdata', (req, res) => {
     if (!req.user) {
