@@ -52,7 +52,7 @@ apiRoutes.get('/get-survey/:uuid', async (req, res) => {
             include: db.Answer
         }]
     });
-res.send(survey);
+    res.send(survey);
 });
 apiRoutes.get('/get-survey-questions/:uuid', async (req, res) => {
     const surveyQuestions = await db.Question.findAll({
@@ -84,19 +84,6 @@ apiRoutes.delete('/delete/:id', async (req, res) => {
     res.json(delelteSurvey);
 });
 
-
-//[get]
-//1. get survey & question info for rendering take-survey page.
-apiRoutes.get('/take-survey/:id', async (req, res) => {
-    const options = {
-        where: {
-            uuid: req.params.id
-        },
-        include: [db.Question]
-    };
-    const takeSurvey = await db.Survey.findAll(options);
-    res.json(takeSurvey);
-});
 
 //2. get answer info for rendering results-survey page
 apiRoutes.get('/results/:id', async (req, res) => {
