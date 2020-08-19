@@ -23,5 +23,11 @@ export default {
         await axios.post("/api/create-question-answer", answers);
 
         return console.log("Survey Published!");
+    },
+
+    getSurveyById: async function (uuid) {
+        const { data } = await axios.get(`/api/get-survey/${uuid}`);
+
+        return data[0];
     }
 };
