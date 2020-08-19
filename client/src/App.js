@@ -13,51 +13,27 @@ function App() {
   const [user, setUser] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
+  //verify login 
   useEffect(() => {
     axios.get('api/checkAuthentication').then(res => {
       setUser(res.data.user);
       if (res.data.user && res.data.user.email) {
-        setIsAuthenticated(true);
+        setIsAuthenticated(true)
       }
     })
   }, []);
 
-  // function loggedInRoutes() {
-  //   if (user && user.email) {
-  //     return (
-  //       <>
-  //         <Route path="/home/" component={HomePage} />
-  //         <Route path="/create-survey/" component={CreateSurvey} />
-  //         <Route path="/results/:id" component={ViewResults} />
-  //       </>
-  //     )
-  //   } else {
-  //     return (
-  //       <>
-  //         <Route exact path="/signup/" component={SignUp} />
-  //         <Route component={Main} />
-  //       </>
-  //     )
-  //   }
 
-  // };
-
-  function checkAuthentication() {
-    if (user && user.email) {
-      setIsAuthenticated(true);
-    }
-  };
-
+  //protected routes check to make sure user is logged in before allowing to continue to target, otherwise redirect to main page
   return (
     <Router>
       <Header />
       <Switch>
         <ProtectedRoute exact={true} path="/home/" component={HomePage} isAuthenticated={isAuthenticated} />
-        <Route exact path="/create-survey/" component={CreateSurvey} />
+        <ProtectedRoute exact={true} path="/create-survey/" component={CreateSurvey} isAuthenticated={isAuthenticated} />
         <Route exact path="/results/:id" component={ViewResults} />
         <Route exact path="/signup/" component={SignUp} />
-        <Route component={Main} />
+        <Route path="/" component={Main} />
       </Switch>
     </Router>)
 };
