@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import ViewResults from './pages/ViewResults';
 import axios from "axios";
 import ProtectedRoute from './components/ProtectedRoute';
+import TakeSurvey from "./pages/TakeSurvey";
 
 function App() {
   const [user, setUser] = useState();
@@ -32,6 +33,7 @@ function App() {
         <ProtectedRoute exact={true} path="/home/" component={HomePage} isAuthenticated={isAuthenticated} />
         <ProtectedRoute exact={true} path="/create-survey/" component={CreateSurvey} isAuthenticated={isAuthenticated} />
         <Route exact path="/results/:id" component={ViewResults} />
+        <Route exact path="/take-survey/:id" component={TakeSurvey} />
         <Route exact path="/signup/" component={SignUp} />
         <Route path="/" component={Main} />
       </Switch>
