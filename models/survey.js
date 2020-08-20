@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
     const Survey = sequelize.define(
         'Survey',
         {
-            // user_id: DataTypes.INTEGER,
             survey_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -24,11 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     );
     Survey.associate = function (models) {
         // associations can be defined here
-        Survey.belongsTo(models.User, {
-            // foreignKey: {
-            //     allowNull: false
-            // }
-        });
+        Survey.belongsTo(models.User, {});
+        
         Survey.hasMany(models.Question, {
             onDelete: "cascade",
             foreignKey: {

@@ -112,7 +112,13 @@ apiRoutes.get('/get-answer-count/:uuid', async (req, res) => {
                 attributes: [
                     'answer',
                     'count'
-                ]
+                ],
+                include: [{
+                    model: db.FreeResponse,
+                    attributes: [
+                        'response'
+                    ]
+                }]
             }]
         }]
     });
@@ -123,14 +129,26 @@ apiRoutes.get('/get-answer-count/:uuid', async (req, res) => {
 
 // This put route takes in an array of question ID numbers, ex. [1, 3, 6], and increments the count value in those answer items by 1
 apiRoutes.put('/increment-answers', async (req, res) => {
-    req.body.map((ans) => {
-        db.Answer.increment('count', {
-            where: {
-                id: ans
-            }
-        });
+    let dbResponse;
+    console.log(req.body);
+    req.body.map(async (ans) => {
+        console.log(typeof ans);
+        if (typeof ans === "number") {
+            await db.Answer.increment('count', {
+                where: {
+                    id: ans
+                }
+            });
+        } else {
+            await db.Answer.increment('count', {
+                where: {
+                    id: ans.AnswerId
+                }
+            });
+            dbResponse = await db.FreeResponse.create(ans);
+        }
     });
-    res.end();
+    res.json(dbResponse);
 });
 
 //[delete]
