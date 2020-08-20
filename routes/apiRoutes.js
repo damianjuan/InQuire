@@ -22,10 +22,14 @@ apiRoutes.post('/login', passport.authenticate('local'), (req, res) => {
 
 apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
     const user = req.user ? req.user : null;
-    console.log("user");
     res.status(200).json({
         user: user,
     });
+});
+
+apiRoutes.get('/logout', function (req, res) {
+    req.logout();
+    window.location.replace("/");
 });
 
 // Route for getting some data about our user to be used client side
