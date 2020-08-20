@@ -44,22 +44,19 @@ apiRoutes.get('/userdata', (req, res) => {
 
 // This route creates a new survey using passed in survey_name and uuid
 apiRoutes.post('/create-survey', async (req, res) => {
-    const dbTitle = await db.Survey.create(req.body);
-    res.json(dbTitle);
-});
+    const dbTitle = await db.Survey.create(req.body.survey);
 
-// This route creates any number of new survey questions using a passed in array containing multiple objects with
-// question_title, question_type, and SurveyUuid, for relating it back to the survey it belongs to
-apiRoutes.post('/create-survey-question', async (req, res) => {
-    const dbQuestions = await db.Question.bulkCreate(req.body);
-    res.json(dbQuestions);
-});
+    // Creates any number of new survey questions using a passed in array containing multiple objects with
+    // Question_title, question_type, and SurveyUuid, for relating it back to the survey it belongs to
+    const dbQuestions = await db.Question.bulkCreate(req.body.questions);
 
-// This route creates any number of new survey question answers using a passed in array containing multiple objects with
-// answer and QuestionId, for relating it back to the question it belongs to
-apiRoutes.post('/create-question-answer', async (req, res) => {
-    const dbAnswers = await db.Answer.bulkCreate(req.body);
-    res.json(dbAnswers);
+    // Creates any number of new survey question answers using a passed in array containing multiple objects with
+    // Answer and QuestionId, for relating it back to the question it belongs to
+    req.body.answers.map((answer) => {
+        answer.QuestionId = dbQuestions[answer.QuestionId].id;
+    });
+    const dbAnswers = await db.Answer.bulkCreate(req.body.answers);
+    res.json({ dbTitle, dbQuestions, dbAnswers });
 });
 
 // Routes for getting survey information
