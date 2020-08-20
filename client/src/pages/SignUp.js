@@ -10,10 +10,10 @@ function SignUp() {
         API.signUp({
             email: event.target.email.value,
             password: event.target.password.value
-        });
-        // .then(() => {
-        //     window.location.replace("/");
-        // })
+        })
+            .then(() => {
+                window.location.replace("/");
+            })
 
     }
 
@@ -30,9 +30,9 @@ function SignUp() {
                     <br></br>
                     <input className="my-2 w-3/6" type="password" name="password" placeholder="Password" />
                     <br></br>
-                    <button type="submit">Sign Up</button>
+                    <button type="submit" className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end">Sign Up</button>
                 </form>
-                <button onClick={backtoHome}>Back</button>
+                <button onClick={backtoHome} className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end">Back</button>
             </div>
         </main>
     );
