@@ -47,5 +47,10 @@ export default {
         await axios.put("/api/increment-answers", answerArr);
 
         return console.log("Answers Submitted!");
+    },
+    //api call to delete survey
+    deleteSurvey: async function (uuid) {
+        await axios.delete(`api/delete/${uuid}`);
+        return window.location.reload(false);
     }
 };
