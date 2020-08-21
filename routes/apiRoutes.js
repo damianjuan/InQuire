@@ -27,9 +27,16 @@ apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
     });
 });
 
+//passport built in function to end any active sessions when called 
 apiRoutes.get('/logout', function (req, res) {
+    console.log("logout route hit");
     req.logout();
-    window.location.replace("/");
+    req.session.destroy(function (err) {
+        if (err) {
+            return next(err);
+        }
+        return res.send({ success: true });
+    });
 });
 
 // Route for getting some data about our user to be used client side
