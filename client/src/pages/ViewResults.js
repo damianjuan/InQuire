@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SelectChartType from '../components/SelectChartType';
 import API from '../utils/API';
@@ -47,26 +47,31 @@ import API from '../utils/API';
 // ];
 
 export default function ViewResults() {
+    const [data, setData] = useState();
     const { id } = useParams();
-    console.log("id", id);
-    let data = [];
+
     useEffect(() => {
         API.getAnswerCounts(id)
             .then(res => {
-                data = res.Questions;
-                console.log(data);
+                setData(res);
             })
             .catch(err => console.log(err));
     }, []);
     
-
-    return (
-        <main className="mx-auto my-4 p-4 w-5/6 ">
-            {
-                data.map((res, i) => (
-                    <SelectChartType type={res[i].question_type} id={res[i].id} />
-                ))
-            }
-        </main>
-    )
+    if (data) {
+        return (
+            <main className="mx-auto my-4 p-4 w-5/6 ">
+                <h2>{data.survey_name}</h2>
+                {
+                    data.Questions.map((question) => (
+                        <SelectChartType question={question} key={question.id} />
+                    ))
+                }
+            </main>
+        )
+    } else {
+        return (
+            <main>Loading...</main>
+        )
+    }   
 };
