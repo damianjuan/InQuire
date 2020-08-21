@@ -20,7 +20,7 @@ function App() {
     axios.get('api/checkAuthentication').then(res => {
       setUser(res.data.user);
       if (res.data.user && res.data.user.email) {
-        setIsAuthenticated(true)
+        setIsAuthenticated(true);
       }
     })
   }, []);

@@ -87,14 +87,15 @@ apiRoutes.get('/get-survey/:uuid', async (req, res) => {
 });
 
 // This route takes in a user ID number and returns all the names with associated uuids of surveys they have created
-apiRoutes.get('/get-user-surveys/:userId', async (req, res) => {
+apiRoutes.get('/get-user-surveys/', isAuthenticated, async (req, res) => {
     const surveyList = await db.Survey.findAll({
+
         attributes: [
             'survey_name',
             'uuid'
         ],
         where: {
-            userId: req.params.userId
+            userId: req.user.id
         }
     });
     res.send(surveyList);
