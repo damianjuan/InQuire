@@ -9,6 +9,7 @@ import ViewResults from './pages/ViewResults';
 import axios from "axios";
 import ProtectedRoute from './components/ProtectedRoute';
 import TakeSurvey from "./pages/TakeSurvey";
+import ThankYou from "./pages/ThankYou";
 
 function App() {
   const [user, setUser] = useState();
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/results/:id" component={ViewResults} />
         <Route exact path="/take-survey/:id" component={TakeSurvey} />
         <Route exact path="/signup/" component={SignUp} />
+        <Route exact path="/thankyou/" component={ThankYou} />
         <Route path="/" component={Main} />
       </Switch>
     </Router>)
