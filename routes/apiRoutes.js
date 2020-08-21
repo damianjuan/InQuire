@@ -17,14 +17,23 @@ apiRoutes.post('/signup', async (req, res) => {
 apiRoutes.post('/login', passport.authenticate('local'), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json(req.body);
-
 });
 
 apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
     const user = req.user ? req.user : null;
-    console.log("user");
     res.status(200).json({
         user: user,
+    });
+});
+
+//passport built in function to end any active sessions when called 
+apiRoutes.get('/logout', function (req, res) {
+    req.logout();
+    req.session.destroy(function (err) {
+        if (err) {
+            return next(err);
+        }
+        return res.send({ success: true });
     });
 });
 

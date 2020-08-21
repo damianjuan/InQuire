@@ -10,7 +10,7 @@ const expressSession = require("express-session");
 const db = require('./models');
 const routes = require('./routes');
 
-app.use(expressSession({ secret: process.env.sessionSecret, resave: true, saveUninitialized: true }));
+app.use(expressSession({ secret: process.env.sessionSecret, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 

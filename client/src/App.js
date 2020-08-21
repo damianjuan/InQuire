@@ -24,11 +24,10 @@ function App() {
     })
   }, []);
 
-
   //protected routes check to make sure user is logged in before allowing to continue to target, otherwise redirect to main page
   return (
     <Router>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       <Switch>
         <ProtectedRoute exact={true} path="/home/" component={HomePage} isAuthenticated={isAuthenticated} />
         <ProtectedRoute exact={true} path="/create-survey/" component={CreateSurvey} isAuthenticated={isAuthenticated} />
@@ -39,6 +38,5 @@ function App() {
       </Switch>
     </Router>)
 };
-
 
 export default App;
