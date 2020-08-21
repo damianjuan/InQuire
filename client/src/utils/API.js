@@ -36,7 +36,7 @@ export default {
     // API call to return the results of a survey, returning survey name, all questions prompts with associated answers,
     // All answers have associated answer counts.  Once again data is naturally a single JSON object inside an array
     getAnswerCounts: async function (uuid) {
-        const { data } = await axios.get(`api/get-answer-count/${uuid}`);
+        const { data } = await axios.get(`/api/get-answer-count/${uuid}`);
 
         return data[0];
     },
