@@ -5,16 +5,17 @@ import API from '../utils/API';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // ToDo
-// make delete button work
-// make link for user to copy survey to send
+// make button for user to copy survey to clipboard use whatever the current host is 
 
 export default function HomePage(props) {
     console.log(props.userEmail);
     const [userSurveys, setUserSurveys] = useState([]);
     const [userEmail, setUserEmail] = useState();
+    // const [linkStart, setLinkStart] = useState();
 
     useEffect(() => {
         //grabs surveys with uuid linked to user
+        // setLinkStart(process.env.PUBLIC_URL);
         axios.get('api/get-user-surveys/').then(res => {
             console.log(res);
             if (res.data.length > 0) {
@@ -56,8 +57,14 @@ export default function HomePage(props) {
                             </CopyToClipboard>
                             {/* <button onClick="link to take survey" id="takeBtn" className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
                             >Take</button> */}
-                            <button onClick="link to view results here" id="result-Btn" className="text-center  m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
-                            >Results</button>
+
+                            <Link className="mx-auto p-2 bg-yellow-500 rounded-full w-40 text-center" to={process.env.PUBLIC_URL + `/results/${uuid}`}>Results</Link>
+
+                            {/* <button onClick="link to view results here" id="result-Btn" className="text-center  m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
+                            >Results</button> */}
+
+
+
                             <button id="delete-Btn" surveyId={uuid} className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end" onClick={(event) => { handleDelete(uuid, event) }}>Delete</button>
                         </li>
                     ))}
