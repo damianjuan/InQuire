@@ -15,8 +15,11 @@ function TakeSurvey() {
     }, []);
 
     function submitBtn() {
-        API.submitResults(answer);
-        // .then(window.localStorage.replace("/thankyou"));
+
+        API.submitResults(answer)
+            .then(() => {
+                window.location.replace("/thankyou");
+            })
     }
 
     function handleOnChange(e) {
