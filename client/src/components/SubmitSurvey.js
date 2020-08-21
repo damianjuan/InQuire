@@ -28,7 +28,7 @@ function SubmitSurvey() {
 
             API.publish({
                 survey_name: state.survey_title,
-                uuid: uuid
+                uuid: uuid,
             },
                 questions,
                 answers

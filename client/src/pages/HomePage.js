@@ -13,8 +13,9 @@ const userSurveys = [
         title: "second Test survey"
     }];
 
-export default function HomePage() {
 
+export default function HomePage(req) {
+    console.log(req);
 
 
     return (
