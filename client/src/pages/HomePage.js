@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
 //need to get username from session just test data for now
 const userName = "exampleuser@test.com";
 // need to get list of survey titles and id from database just test data for now
@@ -13,8 +13,9 @@ const userSurveys = [
         title: "second Test survey"
     }];
 
-export default function HomePage() {
 
+export default function HomePage(req) {
+    console.log(req);
 
 
     return (
@@ -22,7 +23,7 @@ export default function HomePage() {
             <header className="bg-green-300 text-center text-4xl p-4 rounded-lg" >
                 Welcome {userName}
             </header>
-            <button className="m-2 p-2 bg-yellow-500 rounded-full w-40 self-end" type="submit">Create New Survey</button>
+            <Link className="m-2 p-2 bg-yellow-500 rounded-full w-40 self-end" to={process.env.PUBLIC_URL + '/create-survey'} >Create New Survey</Link>
             <section>
                 <ul>
                     {userSurveys.map(({ title, id }) => (

@@ -52,7 +52,8 @@ apiRoutes.get('/userdata', (req, res) => {
 // Routes for creating surveys
 
 // This route creates a new survey using passed in survey_name and uuid
-apiRoutes.post('/create-survey', async (req, res) => {
+apiRoutes.post('/create-survey', isAuthenticated, async (req, res) => {
+    req.body.survey.UserId = req.user.id || "anonymous";
     const dbTitle = await db.Survey.create(req.body.survey);
 
     // Creates any number of new survey questions using a passed in array containing multiple objects with
