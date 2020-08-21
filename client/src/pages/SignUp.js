@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import API from "../utils/API"
 
-
-
 function SignUp() {
     const [passwordErrorVis, setPasswordErrorVis] = useState("hidden");
     const [emailErrorVis, setEmailErrorVis] = useState("hidden");
@@ -50,7 +48,7 @@ function SignUp() {
                     <p style={{ visibility: passwordErrorVis, color: "red" }}>Passwords don't match. Re-enter password</p>
                     <p style={{ visibility: emailErrorVis, color: "red" }}>Incorrect email format. Re-enter email.</p>
                 </form>
-                <button onClick={backtoHome} className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end">Back</button>
+                {/* <button onClick={backtoHome} className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end">Back</button> */}
             </div>
         </main>
     );

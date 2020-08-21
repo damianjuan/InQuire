@@ -6,7 +6,6 @@ import Main from '../pages/Main';
 export default function ProtectedRoute({ component, isAuthenticated }) {
     const Component = component;
     const CheckIsAuthenticated = isAuthenticated;
-    console.log(isAuthenticated);
 
     return (
         CheckIsAuthenticated ? (

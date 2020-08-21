@@ -23,7 +23,6 @@ function App() {
     })
   }, []);
 
-
   //protected routes check to make sure user is logged in before allowing to continue to target, otherwise redirect to main page
   return (
     <Router>
@@ -37,6 +36,5 @@ function App() {
       </Switch>
     </Router>)
 };
-
 
 export default App;
