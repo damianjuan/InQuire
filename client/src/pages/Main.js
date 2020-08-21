@@ -26,7 +26,7 @@ function Main() {
                 <button className="mx-auto my-2 p-2 bg-yellow-500 rounded-full w-40" type="submit">Log In</button>
             </form>
             <div className="flex flex-col mx-auto p-4 w-full text-lg">
-                <Link className="mx-auto p-2 bg-yellow-500 rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/create-survey'}>Login as Guest</Link><br />
+                {/* <Link className="mx-auto p-2 bg-yellow-500 rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/create-survey'}>Login as Guest</Link><br /> */}
                 <Link className="mx-auto p-2 bg-yellow-500 rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/signup'}>Sign Up</Link>
             </div>
         </main>
