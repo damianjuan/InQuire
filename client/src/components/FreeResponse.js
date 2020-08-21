@@ -11,17 +11,14 @@ const TEST_DATA = [
     }
 ];
 
-export default function FreeResponse() {
-
+export default function FreeResponse({ answers }) {
+    console.log("answers", answers, "answers.FreeResponses", answers.FreeResponses);
     return (
-        <div className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg">
-            <h1 className="font-semibold">FreeResponse</h1>
+        <div>
             {
-                TEST_DATA.map(res => (res.count.map(val => (
-                    <h4 className="font-light">{val}</h4>
-                )))
-
-                )
+                answers.FreeResponses.map((res, i) => (
+                    <h4 className="font-light" key={i}>{res.response}</h4>
+                ))
             }
         </div>
     )

@@ -115,12 +115,14 @@ apiRoutes.get('/get-answer-count/:uuid', async (req, res) => {
         include: [{
             model: db.Question,
             attributes: [
+                'id',
                 'question_title',
                 'question_type'
             ],
             include: [{
                 model: db.Answer,
                 attributes: [
+                    'id',
                     'answer',
                     'count'
                 ],
@@ -141,9 +143,7 @@ apiRoutes.get('/get-answer-count/:uuid', async (req, res) => {
 // This put route takes in an array of question ID numbers, ex. [1, 3, 6], and increments the count value in those answer items by 1
 apiRoutes.put('/increment-answers', async (req, res) => {
     let dbResponse;
-    console.log(req.body);
     req.body.map(async (ans) => {
-        console.log(typeof ans);
         if (typeof ans === "number") {
             await db.Answer.increment('count', {
                 where: {
