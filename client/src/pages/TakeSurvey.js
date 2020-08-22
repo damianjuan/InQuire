@@ -51,15 +51,15 @@ function TakeSurvey() {
         } else {
             // console.log(question);
             return (
-                <main>
-                    <h2 className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg text-center">
+                <main className="flex flex-col items-center text-2xl w-5/6 sm:w-2/3 md:w-1/2 mx-auto">
+                    <h2 className="w-full my-4 p-4 bg-grey rounded-lg text-3xl text-center">
                         Survey Title : {question.survey_name}
                     </h2>
                     {question.Questions.map((item, index) => {
                         if (item.question_type === "multipleChoice") {
                             return (
-                                <article className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg" key={index}>
-                                    {index + 1}) {item.question_title}<hr />
+                                <article className="w-full mx-auto my-4 p-4 bg-grey rounded-lg hover:shadow-md" key={index}>
+                                    {index + 1}) {item.question_title}
                                     <ul>
                                         {item.Answers.map((choice, index) => {
                                             return (
@@ -76,8 +76,8 @@ function TakeSurvey() {
                             )
                         } else if (item.question_type === "selectApply") {
                             return (
-                                <article className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg" key={index}>
-                                    {index + 1}) {item.question_title}<hr />
+                                <article className="w-full my-4 p-4 bg-grey rounded-lg hover:shadow-md" key={index}>
+                                    {index + 1}) {item.question_title}
                                     <ul>
                                         {item.Answers.map((choice, index) => {
                                             return (
@@ -95,10 +95,10 @@ function TakeSurvey() {
                             )
                         } else {
                             return (
-                                <article className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg" onChange={handleFreeResChange} key={index}>
-                                    {index + 1}) {item.question_title}<hr />
+                                <article className="w-full my-4 p-4 bg-grey rounded-lg hover:shadow-md" onChange={handleFreeResChange} key={index}>
+                                    {index + 1}) {item.question_title}
                                     <form>
-                                        <input className="m-8" type="text" id={item.Answers[0].id} name={item.id} />
+                                        <input className="m-4 p-1 text-xl" type="text" id={item.Answers[0].id} name={item.id} />
                                     </form>
                                 </article>
                             )
@@ -106,7 +106,7 @@ function TakeSurvey() {
                     })
                     }
                     <div className="flex">
-                        <button className="mx-auto p-2 bg-yellow-500 rounded-full w-40" type="submit" onClick={submitBtn}>Submit Survey</button>
+                        <button className="p-2 bg-light rounded-full text-xl w-40" type="submit" onClick={submitBtn}>Submit Survey</button>
                     </div>
                 </main>
             )

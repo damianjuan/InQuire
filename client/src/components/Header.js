@@ -15,11 +15,11 @@ function Header({ isAuthenticated }) {
 
     return (
 
-        <header className=" bg-green-300 ">
-            <a className=" mx-auto text-center text-4xl p-4 ">InQuery</a>
+        <header className="flex justify-between items-center bg-dark">
+            <Link className="text-lightgrey text-4xl py-4 px-8" to={process.env.PUBLIC_URL + '/home/'}>InQuery</Link>
             {
-                CheckIsAuthenticated === true ? (<Link className="mx-auto my-2 p-2 bg-yellow-500 rounded-full w-40" to={process.env.PUBLIC_URL + '/'} onClick={handleLogout}>Log out</Link>) : (
-                    <Link className="mx-auto my-2 p-2 bg-yellow-500 rounded-full w-40 " to={process.env.PUBLIC_URL + '/'}>Log In</Link>
+                CheckIsAuthenticated === true ? (<Link className="text-center p-2 mr-8 bg-light rounded-full w-20" to={process.env.PUBLIC_URL + '/'} onClick={handleLogout}>Log out</Link>) : (
+                    <Link className="text-center p-2 mr-8 bg-light rounded-full w-20" to={process.env.PUBLIC_URL + '/'}>Log In</Link>
                 )
             }
         </header>

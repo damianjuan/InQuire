@@ -61,12 +61,15 @@ export default function ViewResults() {
     if (data) {
         return (
             <main className="mx-auto my-4 p-4 w-5/6 ">
-                <h2>{data.survey_name}</h2>
-                {
-                    data.Questions.map((question) => (
-                        <SelectChartType question={question} key={question.id} />
-                    ))
-                }
+                <h2 className="text-3xl">{data.survey_name}</h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                    {
+                        data.Questions.map((question) => (
+                            <SelectChartType question={question} key={question.id} />
+                        ))
+                    }
+                </div>
             </main>
         )
     } else {
