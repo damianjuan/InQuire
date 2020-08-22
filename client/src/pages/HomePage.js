@@ -53,7 +53,7 @@ export default function HomePage(props) {
                     <li className="">
                         <h3 className="text-lightgrey text-3xl my-4 mx-2 rounded-lg">{survey_name}</h3>
                         <div className="flex flex-row items-center my-4">
-                            <CopyToClipboard className="text-center mx-2 p-2 bg-light rounded-full w-40" text={`https://inquery-53565.herokuapp.com/take-survey/${uuid}`}>
+                            <CopyToClipboard className="text-center mx-2 p-2 bg-light rounded-full w-40" text={`https://inquire-6846.herokuapp.com/take-survey/${uuid}`}>
                                 <button>Copy Survey Link</button>
 
                             </CopyToClipboard>
