@@ -8,7 +8,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 // make button for user to copy survey to clipboard use whatever the current host is 
 
 export default function HomePage(props) {
-    console.log(props.userEmail);
     const [userSurveys, setUserSurveys] = useState([]);
     const [userEmail, setUserEmail] = useState();
     // const [linkStart, setLinkStart] = useState();
@@ -17,7 +16,6 @@ export default function HomePage(props) {
         //grabs surveys with uuid linked to user
         // setLinkStart(process.env.PUBLIC_URL);
         axios.get('api/get-user-surveys/').then(res => {
-            console.log(res);
             if (res.data.length > 0) {
                 setUserSurveys(res.data);
                 console.log("saved survey info to state");
@@ -36,10 +34,6 @@ export default function HomePage(props) {
         event.preventDefault();
         API.deleteSurvey(uuid);
     }
-
-
-
-    console.log(userSurveys);
 
     return (
         <main className="flex flex-col bg-dark sm:w-2/3 lg:w-1/2 sm:rounded mx-auto my-8 p-8">

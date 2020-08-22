@@ -11,7 +11,6 @@ const TEST_DATA = [
 ];
 
 export default function BarGraph({ answers }) {
-    console.log(answers);
 
     return (
         <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
