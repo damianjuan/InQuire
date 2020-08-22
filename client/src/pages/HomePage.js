@@ -46,6 +46,7 @@ export default function HomePage(props) {
             <header className="text-center text-lightgrey text-3xl mb-4 rounded-lg">
                 Welcome {userEmail}
             </header>
+
             <Link className="self-end my-4 p-2 bg-light rounded-full w-40" to={process.env.PUBLIC_URL + '/create-survey'} >Create New Survey</Link>
             <ul>
                 {userSurveys.map(({ survey_name, uuid }) => (
@@ -54,6 +55,7 @@ export default function HomePage(props) {
                         <div className="flex flex-row items-center my-4">
                             <CopyToClipboard className="text-center mx-2 p-2 bg-light rounded-full w-40" text={`https://inquery-53565.herokuapp.com/take-survey/${uuid}`}>
                                 <button>Copy Survey Link</button>
+
                             </CopyToClipboard>
                             {/* <button onClick="link to take survey" id="takeBtn" className="text-center m-2 p-2 bg-light rounded-full w-40 self-end"
                             >Take</button> */}
