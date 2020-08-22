@@ -6,7 +6,6 @@ function CreateQuestion() {
     const questionRef = useRef();
     const typeRef = useRef();
     const [state, dispatch] = useQuestionContext();
-    console.log("state ---- ", state);
 
     function chooseType(questionType) {
         switch (questionType) {

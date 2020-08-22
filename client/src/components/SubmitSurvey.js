@@ -16,7 +16,7 @@ function SubmitSurvey() {
                 questionItem.SurveyUuid = uuid;
                 questionItem.contents.map((answer) => {
                     if (answer) {
-                        const item = {answer};
+                        const item = { answer };
                         item.QuestionId = i;
                         answers.push(item);
                     }
@@ -28,11 +28,12 @@ function SubmitSurvey() {
 
             API.publish({
                 survey_name: state.survey_title,
-                uuid: uuid
+                uuid: uuid,
             },
                 questions,
                 answers
             );
+            window.location.replace("/home");
         } else {
             !state.survey_title ? console.error("Please title the survey!") : console.error("Add at least one question!");
         }

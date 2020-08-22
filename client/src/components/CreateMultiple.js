@@ -5,7 +5,6 @@ function CreateMultiple() {
     const [state, dispatch] = useQuestionContext();
 
     function handleFieldChange(e) {
-        console.log(e.target);
         dispatch({
             call: "changeAnswer",
             slot: parseInt(e.target.id),

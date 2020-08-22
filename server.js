@@ -6,9 +6,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 //-------------------------------------------
 const passport = require("./config/passport");
+const expressSession = require("express-session");
 const db = require('./models');
 const routes = require('./routes');
 
+app.use(expressSession({ secret: process.env.sessionSecret, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 

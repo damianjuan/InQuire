@@ -6,3 +6,4 @@ const router = new Router();
 router.use('/api', apiRoutes);
 
 module.exports = router;
+
