@@ -16,11 +16,11 @@ function CreateQuestion() {
                 );
             case "freeResponse":
                 return (
-                    <div className="text-xl">Free response will allow users to submit their own responses.</div>
+                    <div className="text-2xl my-2 text-lightgrey">Free response will allow users to submit their own responses.</div>
                 );
             default:
                 return (
-                    <div>Please select a question type.</div>
+                    <div className="text-2xl my-2 text-lightgrey">Please select a question type.</div>
                 )
         }
     }
@@ -45,15 +45,15 @@ function CreateQuestion() {
     }
 
     return(
-        <form className="flex flex-col p-2 mx-4" onSubmit={addQuestion}>
+        <form className="flex flex-col my-4" onSubmit={addQuestion}>
             <div className="flex flex-col flex-1">
-                <label className="flex-1 text-xl mx-auto">
+                <label className="flex-1 text-2xl text-lightgrey my-4 mx-auto">
                     Input Question:
-                    <input className="my-2 w-full" type="text" name="question" ref={questionRef} onChange={(e) => dispatch({ call: "changeQuestion", question_title: e.target.value })} />
+                    <input className="my-4 w-full p-1 text-xl text-black" type="text" name="question" ref={questionRef} onChange={(e) => dispatch({ call: "changeQuestion", question_title: e.target.value })} />
                 </label>
-                <label className="flex-1 text-xl mx-auto">
+                <label className="flex-1 text-2xl text-lightgrey my-4 mx-auto">
                     Select Question Type: 
-                    <select className="my-2 w-full" name="selectType" ref={typeRef} onChange={
+                    <select className="my-4 w-full p-1 text-xl text-black" name="selectType" ref={typeRef} onChange={
                         (e) => dispatch({ call: "changeType", question_type: e.target.value })
                     }>
                         <option value="choose">Choose One</option>
@@ -64,7 +64,7 @@ function CreateQuestion() {
                 </label>
             </div>
             {chooseType(state.current_question.question_type)}
-            <button className="m-2 p-2 bg-yellow-500 rounded-full w-40 self-end" type="submit">Add Question</button>
+            <button className="mt-4 p-2 bg-light rounded-full w-40 self-end" type="submit">Add Question</button>
         </form>
     );
 }

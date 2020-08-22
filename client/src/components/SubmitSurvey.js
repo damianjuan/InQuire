@@ -41,7 +41,7 @@ function SubmitSurvey() {
 
     return (
         <div className="flex">
-            <button className="mx-auto p-2 bg-yellow-500 rounded-full w-40" onClick={submitClick} type="button">Publish Survey</button>
+            <button className="mx-auto p-2 bg-light rounded-full w-40 self-end" onClick={submitClick} type="button">Publish Survey</button>
         </div>
     );
 }

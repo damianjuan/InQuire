@@ -6,9 +6,9 @@ function CreateSurveyName() {
 
     return (
         <form>
-            <label className="text-xl m-2 block">
+            <label className="text-3xl text-lightgrey mb-4 block">
                 Survey Name:
-                    <input className="my-2 w-full" type="text" name="surveyName" onChange={(e) => dispatch({ call: "changeSurveyTitle", survey_title: e.target.value })} />
+                    <input className="my-4 w-full p-1 text-xl text-black" type="text" name="surveyName" onChange={(e) => dispatch({ call: "changeSurveyTitle", survey_title: e.target.value })} />
             </label>
         </form>
     );
