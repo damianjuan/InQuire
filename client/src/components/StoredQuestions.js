@@ -29,10 +29,10 @@ function StoredQuestions() {
     }
 
     return (
-        <ul className="flex flex-col p-2 mx-4">
+        <ul className="flex flex-col mb-4 text-lightgrey">
             {state.questions.map((item, i) => (
-                <li className="flex flex-col flex-1 mb-2" key={i} name={item.id}>
-                    <label className="flex flex-col flex-1 text-xl my-2">
+                <li className="flex flex-col flex-1 rounded hover:bg-light hover:text-black p-4" key={i} name={item.id}>
+                    <label className="flex flex-col flex-1 text-2xl my-2">
                         {i + 1}:  {item.question_title}
                         {displayType(item)}
                     </label>
