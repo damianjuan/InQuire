@@ -52,7 +52,7 @@ export default function HomePage(props) {
                     {userSurveys.map(({ survey_name, uuid }) => (
                         <li className="text-center">
                             <p className=" text-4xl p-4 rounded-lg">{survey_name}</p>
-                            <CopyToClipboard text={`https://inquery-53565.herokuapp.com/take-survey/${uuid}`}>
+                            <CopyToClipboard text={`https://inquire-6846.herokuapp.com/${uuid}`}>
                                 <button className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end">Copy Survey Link</button>
                             </CopyToClipboard>
                             {/* <button onClick="link to take survey" id="takeBtn" className="text-center m-2 p-2 bg-yellow-500 rounded-full w-40 self-end"
