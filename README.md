@@ -9,7 +9,7 @@ One Paragraph of project description goes here
 - [Deployment](#deployment)
 - [Built With](#built-with)
 - [Authors](#authors)
-- [Acknowledgements](#acknowledgements)
+- [Acknowledgements](#acknowledgments)
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ for notes on how to deploy the project on a live system.
 
 ## Deployment
 
-Dont forget to set up your session secret!
+Deployed at https://inquire-6846.herokuapp.com/
 
 ## Built With
 
