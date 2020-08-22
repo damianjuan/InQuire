@@ -4,7 +4,8 @@ import API from "../utils/API";
 
 function TakeSurvey() {
     const [question, setQuestion] = useState();
-    const [answer, setAnswer] = useState([]);
+    const [radioAnswer, setRadioAnswer] = useState([]);
+    const [freeResAnswer, setFreeResAnswer] = useState([]);
     const { id } = useParams();
     // console.log(id);
 
@@ -15,8 +16,8 @@ function TakeSurvey() {
     }, []);
 
     function submitBtn() {
-
-        API.submitResults(answer)
+        const answerArr = radioAnswer.concat(freeResAnswer);
+        API.submitResults(answerArr)
             .then(() => {
                 window.location.replace("/thankyou");
             })
@@ -27,8 +28,18 @@ function TakeSurvey() {
             [...document.querySelectorAll('input')]
                 .filter(x => x.checked)
                 .map(x => parseInt(x.value));
-        // console.log(userAnswer);
-        setAnswer(userAnswer);
+        setRadioAnswer(userAnswer);
+    }
+
+    function handleFreeResChange(e) {
+        const userAnswer = 
+            [...document.querySelectorAll('input[type="text"]')]
+                .filter(x => x.value)
+                .map(y => {
+                    console.log(y.value);
+                    return { AnswerId: y.id, response: y.value };
+                });
+        setFreeResAnswer(userAnswer);
     }
 
     function renderQuestions() {
@@ -84,10 +95,10 @@ function TakeSurvey() {
                             )
                         } else {
                             return (
-                                <article className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg" key={index}>
+                                <article className="mx-auto my-4 p-4 w-5/6 bg-gray-300 rounded-lg" onChange={handleFreeResChange} key={index}>
                                     {index + 1}) {item.question_title}<hr />
                                     <form>
-                                        <input className="m-8" type="text" name="response" />
+                                        <input className="m-8" type="text" id={item.Answers[0].id} name={item.id} />
                                     </form>
                                 </article>
                             )
