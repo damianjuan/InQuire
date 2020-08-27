@@ -12,7 +12,6 @@ const TEST_DATA = [
 ];
 
 export default function FreeResponse({ answers }) {
-    console.log("answers", answers, "answers.FreeResponses", answers.FreeResponses);
     return (
         <div>
             {
