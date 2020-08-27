@@ -1,7 +1,7 @@
 # InQuire
-![GitHub repo size](https://img.shields.io/github/repo-size/damianjuan/Project-3) ![GitHub contributors](https://img.shields.io/github/contributors/damianjuan/Project-3) ![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/damianjuan/Inquire) ![GitHub contributors](https://img.shields.io/github/contributors/damianjuan/InQuire) ![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg)
 
-One Paragraph of project description goes here
+This is an app build with React that allows users to create and share surveys. The survey results are displayed in charts for the user.
 
 ## Table of Contents
 - [Getting Started](#getting-started)
