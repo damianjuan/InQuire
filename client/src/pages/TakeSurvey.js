@@ -7,12 +7,11 @@ function TakeSurvey() {
     const [radioAnswer, setRadioAnswer] = useState([]);
     const [freeResAnswer, setFreeResAnswer] = useState([]);
     const { id } = useParams();
-    // console.log(id);
 
     useEffect(() => {
         API.getSurveyById(id)
             .then(res => setQuestion(res))
-            .catch(err => console.log(err));
+            .catch(err => console.err(err));
     }, []);
 
     function submitBtn() {
@@ -36,7 +35,6 @@ function TakeSurvey() {
             [...document.querySelectorAll('input[type="text"]')]
                 .filter(x => x.value)
                 .map(y => {
-                    console.log(y.value);
                     return { AnswerId: y.id, response: y.value };
                 });
         setFreeResAnswer(userAnswer);
@@ -49,7 +47,6 @@ function TakeSurvey() {
                 </>
             );
         } else {
-            // console.log(question);
             return (
                 <main className="flex flex-col items-center text-2xl w-5/6 sm:w-2/3 md:w-1/2 mx-auto">
                     <h2 className="w-full my-4 p-4 bg-grey rounded-lg text-3xl text-center">
