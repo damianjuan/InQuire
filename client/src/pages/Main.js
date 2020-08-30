@@ -10,9 +10,9 @@ function Main() {
             email: event.target.email.value,
             password: event.target.password.value
         })
-            .then(() => {
-                window.location.replace("/home");
-            })
+        .then(() => {
+            window.location.replace("/home");
+        });
     }
 
     return (

@@ -5,8 +5,11 @@ export default {
         return axios.post("/api/signup", userdata);
     },
 
-    logIn: function (userdata) {
-        return axios.post("/api/login", userdata);
+    logIn: async function (userdata) {
+        axios.post("/api/login", userdata)
+            .then((res) => {
+                return res;
+            });
     },
 
     // API call to publish a new survey, it creates the survey with Uuid, then creates all questions related to Uuid,
