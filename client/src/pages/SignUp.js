@@ -42,7 +42,7 @@ function SignUp() {
                 email: event.target.email.value,
                 password: event.target.password.value
             })
-            .then((res) => {
+            .then(() => {
                 window.location.replace("/");
             })
         }
