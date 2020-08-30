@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import API from "../utils/API";
 
 function TakeSurvey() {
@@ -12,7 +12,7 @@ function TakeSurvey() {
         API.getSurveyById(id)
             .then(res => setQuestion(res))
             .catch(err => console.err(err));
-    }, []);
+    });
 
     function submitBtn() {
         const answerArr = radioAnswer.concat(freeResAnswer);
