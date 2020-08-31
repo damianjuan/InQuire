@@ -11,6 +11,8 @@ function DisplayMultipleChoice({ id, contents }) {
                             {item}
                         </label>
                     );
+                } else {
+                    return(<></>);
                 }
             })}
         </div>

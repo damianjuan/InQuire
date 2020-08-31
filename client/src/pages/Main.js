@@ -1,8 +1,9 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../utils/API";
 
-function Main() {
+function Main() {    
+    const [loginUnauth, setLoginUnauth] = useState("none");
 
     function logInHandler(event) {
         event.preventDefault();
@@ -10,9 +11,12 @@ function Main() {
             email: event.target.email.value,
             password: event.target.password.value
         })
-            .then(() => {
-                window.location.replace("/home");
-            })
+        .then(() => {
+            window.location.replace("/home");
+        })
+        .catch(() => {
+            setLoginUnauth("block");
+        });
     }
 
     return (
@@ -25,7 +29,8 @@ function Main() {
             </form>
             <div className="flex flex-col mx-auto w-full text-lg">
                 {/* <Link className="mx-auto p-2 bg-yellow-500 rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/create-survey'}>Login as Guest</Link><br /> */}
-                <Link className="mx-auto mt-4 p-2 bg-light rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/signup'}>Sign Up</Link>
+                <Link className="mx-auto my-4 p-2 bg-light rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/signup'}>Sign Up</Link>
+                <p className="text-center text-red-500" style={{ display: loginUnauth }}>Email and password pair not found</p>
             </div>
         </main>
     );

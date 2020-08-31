@@ -7,8 +7,8 @@ function Header({ isAuthenticated }) {
 
     function handleLogout(event) {
         event.preventDefault();
-        axios.get('api/logout').
-            then(
+        axios.get('api/logout')
+            .then(
                 window.location.replace("/")
             );
     }

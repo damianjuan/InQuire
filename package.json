@@ -15,7 +15,8 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
   },
   "dependencies": {
     "axios": "^0.19.2",

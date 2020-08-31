@@ -9,6 +9,12 @@ export default {
         return axios.post("/api/login", userdata);
     },
 
+    checkAuth: async function () {
+        const { data } = await axios.get("api/checkAuthentication");
+
+        return data;
+    },
+
     // API call to publish a new survey, it creates the survey with Uuid, then creates all questions related to Uuid,
     // And finally creates all answers as related to QuestionId
     publish: async function (survey, questions, answers) {
@@ -27,8 +33,14 @@ export default {
 
     // API call to return all surveys created by a specific user based on userId, returns full survey information
     // Returns full data variable because it is a multi-item array ex. [{}, {}, {}]
-    getUserSurveys: async function (userId) {
-        const { data } = await axios.get(`/api/get-user-surveys/${userId}`);
+    getUserSurveys: async function () {
+        const { data } = await axios.get("/api/get-user-surveys");
+
+        return data;
+    },
+
+    getPublicSurveys: async function () {
+        const { data } = await axios.get("/api/get-public-surveys");
 
         return data;
     },

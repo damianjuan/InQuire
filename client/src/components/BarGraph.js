@@ -3,13 +3,6 @@
 import React from 'react';
 import { VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 
-const TEST_DATA = [
-    { option: 'Jalapenos', count: 7 },
-    { option: 'Pineapple', count: 16 },
-    { option: 'Ham', count: 18 },
-    { option: 'Olives', count: 43 }
-];
-
 export default function BarGraph({ answers }) {
 
     return (

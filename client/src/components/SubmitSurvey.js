@@ -4,7 +4,7 @@ import API from "../utils/API";
 import { v4 as uuidv4 } from 'uuid';
 
 function SubmitSurvey() {
-    const [state, dispatch] = useQuestionContext();
+    const [state] = useQuestionContext();
     const uuid = uuidv4();
 
     function submitClick(e) {
@@ -14,7 +14,7 @@ function SubmitSurvey() {
             let answers = [];
             const questions = state.questions.map((questionItem, i) => {
                 questionItem.SurveyUuid = uuid;
-                questionItem.contents.map((answer) => {
+                questionItem.contents.forEach((answer) => {
                     if (answer) {
                         const item = { answer };
                         item.QuestionId = i;
@@ -27,6 +27,7 @@ function SubmitSurvey() {
             });
 
             API.publish({
+                publicity: state.publicity,
                 survey_name: state.survey_title,
                 uuid: uuid,
             },
