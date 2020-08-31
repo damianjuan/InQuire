@@ -27,6 +27,7 @@ function SubmitSurvey() {
             });
 
             API.publish({
+                publicity: state.publicity,
                 survey_name: state.survey_title,
                 uuid: uuid,
             },

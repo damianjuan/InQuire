@@ -2,8 +2,7 @@ import React from "react";
 import { useQuestionContext } from "../utils/CreateQuestionState";
 
 function CreateSurveyName() {
-    const [state, dispatch] = useQuestionContext();
-    console.log(state);
+    const [_, dispatch] = useQuestionContext();
 
     return (
         <form className="flex flex-col">
