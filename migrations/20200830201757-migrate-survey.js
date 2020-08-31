@@ -6,7 +6,7 @@ module.exports = {
             "Surveys",
             "publicity", {
                 type: Sequelize.STRING,
-                defaultValue: "Private",
+                defaultValue: "private",
                 allowNull: false
             }
         );

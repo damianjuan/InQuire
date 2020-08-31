@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             publicity: {
                 type: DataTypes.STRING,
-                defaultValue: "Private",
+                defaultValue: "private",
                 allowNull: false
             }
         }

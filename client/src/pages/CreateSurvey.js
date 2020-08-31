@@ -10,11 +10,11 @@ function CreateSurvey() {
     return (
         <main className="flex flex-col md:flex-row justify-around m-8">
             <QuestionProvider>
-                <div className="bg-dark md:w-1/3 md:rounded p-8">
+                <div className="bg-dark md:w-5/12 lg:w-1/3 md:rounded p-8">
                     <CreateSurveyName />
                     <CreateQuestion />
                 </div>
-                <div className="bg-dark md:w-1/3 md:rounded p-8">
+                <div className="bg-dark md:w-5/12 lg:w-1/3 md:rounded p-8">
                     <StoredQuestions />
                     <SubmitSurvey />
                 </div>

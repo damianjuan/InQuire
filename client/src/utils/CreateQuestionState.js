@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useContext } from "react";
 
 const QuestionContext = createContext({
+    publicity: "",
     survey_title: "",
     current_question: {
         question_title: "",
@@ -13,6 +14,10 @@ const { Provider } = QuestionContext;
 
 function reducer(state, action) {
     switch (action.call) {
+        case "changePublicity":
+            return Object.assign({}, state, {
+                publicity: action.publicity
+            });
         case "changeSurveyTitle":
             return Object.assign({}, state, {
                 survey_title: action.survey_title
@@ -75,7 +80,7 @@ function reducer(state, action) {
     }
 }
 
-function QuestionProvider({ value = { survey_title: "", current_question: { question_title: "", question_type: "choose", contents: [] }, questions: [] }, ...props}) {
+function QuestionProvider({ value = { publicity: "private", survey_title: "", current_question: { question_title: "", question_type: "choose", contents: [] }, questions: [] }, ...props}) {
     const [state, dispatch] = useReducer(reducer, value);
 
     return <Provider value={[state, dispatch]} {...props} />;
