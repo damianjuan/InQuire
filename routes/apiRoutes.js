@@ -16,10 +16,10 @@ apiRoutes.post('/signup', async (req, res) => {
 // Otherwise the user will be sent an error
 apiRoutes.post('/login', passport.authenticate('local'), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
-    console.log(req.body);
     res.json(req.body);
 });
 
+// Check if user is currently logged in and return their information
 apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
     const user = req.user ? req.user : null;
     res.status(200).json({
@@ -87,7 +87,7 @@ apiRoutes.get('/get-survey/:uuid', async (req, res) => {
     res.send(survey);
 });
 
-// This route takes in a user ID number and returns all the names with associated uuids of surveys they have created
+// This route returns all the names with associated uuids of surveys this user has created
 apiRoutes.get('/get-user-surveys/', isAuthenticated, async (req, res) => {
     const surveyList = await db.Survey.findAll({
 
@@ -101,6 +101,20 @@ apiRoutes.get('/get-user-surveys/', isAuthenticated, async (req, res) => {
     });
     res.send(surveyList);
 });
+
+// This route returns recent public surveys
+apiRoutes.get('/get-public-surveys/', async (req, res) => {
+    const surveyList = await db.Survey.findAll({
+        attributes: [
+            'survey_name',
+            'uuid'
+        ],
+        where: {
+            publicity: "public"
+        }
+    });
+    res.send(surveyList);
+})
 
 // This route takes in a survey Uuid and returns that survey's title, all of that survey's question prompts, as well as all 
 // answer choices with related answer counts related to each question

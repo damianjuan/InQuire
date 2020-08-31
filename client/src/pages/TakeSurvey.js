@@ -12,7 +12,7 @@ function TakeSurvey() {
         API.getSurveyById(id)
             .then(res => setQuestion(res))
             .catch(err => console.err(err));
-    });
+    }, []);
 
     function submitBtn() {
         const answerArr = radioAnswer.concat(freeResAnswer);
