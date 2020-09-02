@@ -22,6 +22,11 @@ module.exports = function (sequelize, DataTypes) {
                 len: [6]
             }
         },
+        rank: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "user"
+        }
     });
 
     User.associate = function (models) {
