@@ -15,6 +15,7 @@ apiRoutes.post('/signup', async (req, res) => {
 // If the user has valid login credentials, send them to the members page.
 // Otherwise the user will be sent an error
 apiRoutes.post('/login', passport.authenticate('local'), (req, res) => {
+    
     // Sending back a password, even a hashed password, isn't a good idea
     res.json(req.body);
 });

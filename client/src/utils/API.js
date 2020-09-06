@@ -1,12 +1,14 @@
 import axios from "axios";
 
 export default {
-    signUp: function (userdata) {
-        return axios.post("/api/signup", userdata);
+    signUp: async function (userdata) {
+        const data = await axios.post("/api/signup", userdata);
+        return data;
     },
 
-    logIn: function (userdata) {
-        return axios.post("/api/login", userdata);
+    logIn: async function (userdata) {
+        const { status } = await axios.post("/api/login", userdata);
+        return status;
     },
 
     checkAuth: async function () {

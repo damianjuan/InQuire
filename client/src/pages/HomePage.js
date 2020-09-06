@@ -10,7 +10,7 @@ import PublicSurveys from "../components/PublicSurveys";
 export default function HomePage() {
     const [userSurveys, setUserSurveys] = useState([]);
     const [publicSurveys, setPublicSurveys] = useState([]);
-    const [userEmail, setUserEmail] = useState();
+    const [currentUser, setCurrentUser] = useState({});
     // const [linkStart, setLinkStart] = useState();
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function HomePage() {
             const othersSurveys = await API.getPublicSurveys();
 
             setUserSurveys(yourSurveys);
-            setUserEmail(user.email);
+            setCurrentUser(user);
             setPublicSurveys(othersSurveys);
         };
         fetchData();
@@ -30,7 +30,7 @@ export default function HomePage() {
         <main className="flex flex-col md:flex-row justify-around m-8">
             <div className="flex flex-col bg-dark md:w-5/12 md:rounded p-8">
                 <h2 className="text-center text-lightgrey text-3xl mb-4 rounded-lg">
-                    Welcome {userEmail} Your Surveys
+                    Welcome {currentUser.email ? currentUser.email.split("@")[0] : currentUser.email} <br />Your Surveys
                 </h2>
 
                 <Link className="self-end my-4 p-2 bg-light rounded-full w-40" to={process.env.PUBLIC_URL + '/create-survey'} >Create New Survey</Link>
