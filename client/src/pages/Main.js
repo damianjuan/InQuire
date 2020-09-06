@@ -5,7 +5,6 @@ import generate, { random } from "meaningful-string";
 
 function Main() {    
     const [loginUnauth, setLoginUnauth] = useState("none");
-    const [guestErr, setGuestErr] = useState("none");
 
     function logInHandler(event) {
         event.preventDefault();
@@ -68,7 +67,6 @@ function Main() {
                 <button className="mx-auto my-4 p-2 bg-light rounded-full w-48" onClick={guestHandler}>Continue as Guest</button>
                 <Link className="mx-auto my-4 p-2 bg-light rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/signup'}>Sign Up</Link>
                 <p className="text-center text-red-500" style={{ display: loginUnauth }}>Email and password pair not found</p>
-                <p className="text-center text-red-500" style={{ display: guestErr }}>Something went wrong! Please try again</p>
             </div>
         </main>
     );

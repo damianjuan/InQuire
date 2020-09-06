@@ -26,15 +26,17 @@ function SubmitSurvey() {
                 return questionItem;
             });
 
-            API.publish({
-                publicity: state.publicity,
-                survey_name: state.survey_title,
-                uuid: uuid,
-            },
+            API.publish(
+                state.user,
+                {
+                    publicity: state.publicity,
+                    survey_name: state.survey_title,
+                    uuid: uuid,
+                },
                 questions,
                 answers
-            );
-            window.location.replace("/home");
+                );
+            // window.location.replace("/home");
         } else {
             !state.survey_title ? console.error("Please title the survey!") : console.error("Add at least one question!");
         }

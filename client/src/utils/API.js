@@ -19,8 +19,8 @@ export default {
 
     // API call to publish a new survey, it creates the survey with Uuid, then creates all questions related to Uuid,
     // And finally creates all answers as related to QuestionId
-    publish: async function (survey, questions, answers) {
-        await axios.post("/api/create-survey", { survey, questions, answers });
+    publish: async function (user, survey, questions, answers) {
+        await axios.post("/api/create-survey", { user, survey, questions, answers });
 
         return console.log("Survey Published!");
     },
