@@ -11,6 +11,11 @@ export default {
         return status;
     },
 
+    logOut: async function () {
+        await axios.get('api/logout');
+        return console.log("Logged Out!");
+    },
+
     checkAuth: async function () {
         const { data } = await axios.get("api/checkAuthentication");
 
@@ -41,6 +46,7 @@ export default {
         return data;
     },
 
+    // Return all surveys marked as public, removing all marked as private
     getPublicSurveys: async function () {
         const { data } = await axios.get("/api/get-public-surveys");
 
@@ -62,9 +68,18 @@ export default {
 
         return console.log("Answers Submitted!");
     },
+
     //api call to delete survey
     deleteSurvey: async function (uuid) {
         await axios.delete(`api/delete/${uuid}`);
+
         return window.location.reload(false);
+    },
+
+    // Remove user by id
+    deleteUser: async function () {
+        await axios.delete(`api/deleteUser`);
+
+        return console.log("User deleted!");
     }
 };

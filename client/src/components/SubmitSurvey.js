@@ -36,7 +36,7 @@ function SubmitSurvey() {
                 questions,
                 answers
                 );
-            // window.location.replace("/home");
+            window.location.replace("/home");
         } else {
             !state.survey_title ? console.error("Please title the survey!") : console.error("Add at least one question!");
         }
