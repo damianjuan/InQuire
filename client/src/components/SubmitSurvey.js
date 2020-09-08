@@ -3,7 +3,7 @@ import { useQuestionContext } from "../utils/CreateQuestionState";
 import API from "../utils/API";
 import { v4 as uuidv4 } from 'uuid';
 
-function SubmitSurvey() {
+function SubmitSurvey({ manipulatePopOut }) {
     const [state] = useQuestionContext();
     const uuid = uuidv4();
 
@@ -35,7 +35,8 @@ function SubmitSurvey() {
                 },
                 questions,
                 answers
-                );
+            );
+            
             window.location.replace("/home");
         } else {
             !state.survey_title ? console.error("Please title the survey!") : console.error("Add at least one question!");
@@ -44,7 +45,7 @@ function SubmitSurvey() {
 
     return (
         <div className="flex">
-            <button className="mx-auto p-2 bg-light rounded-full w-40 self-end" onClick={submitClick} type="button">Publish Survey</button>
+            <button className="mx-auto p-2 bg-light rounded-full w-40 self-end" onClick={((state.user.rank === "guest") && state.survey_title && state.questions.length > 0) ? manipulatePopOut : submitClick} type="button">Publish Survey</button>
         </div>
     );
 }
