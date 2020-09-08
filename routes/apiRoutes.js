@@ -3,18 +3,35 @@ const db = require('../models');
 const passport = require('../config/passport');
 const apiRoutes = Router();
 const isAuthenticated = require('../config/middleware/isAuthenticated');
+const cron = require('node-cron');
+const { Op } = require("sequelize");
+
+// Every hour on the hour, remove all guests from user DB that are more than 24hr old
+// This ensures no one accidentally gets booted in the middle of being active, while keeping
+// The users DB manageable.  Does not remove their surveys, as surveys are not tied to guest users
+cron.schedule("0 * * * *", async () => {
+    const guestList = await db.User.destroy({
+        where: {
+            rank: "guest",
+            createdAt: {
+                [Op.lt]: Date.now() - 86400000
+            }
+        }
+    });
+});
 
 // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
 // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
 // otherwise send back an error
 apiRoutes.post('/signup', async (req, res) => {
-    const signUpdata = db.User.create(req.body);
+    const signUpdata = await db.User.create(req.body);
     res.json(signUpdata);
 });
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
 // Otherwise the user will be sent an error
 apiRoutes.post('/login', passport.authenticate('local'), (req, res) => {
+    
     // Sending back a password, even a hashed password, isn't a good idea
     res.json(req.body);
 });
@@ -54,7 +71,9 @@ apiRoutes.get('/userdata', (req, res) => {
 
 // This route creates a new survey using passed in survey_name and uuid
 apiRoutes.post('/create-survey', isAuthenticated, async (req, res) => {
-    req.body.survey.UserId = req.user.id || "anonymous";
+    if (req.body.user.rank !== "guest") {
+        req.body.survey.UserId = req.user.id;
+    };
     const dbTitle = await db.Survey.create(req.body.survey);
 
     // Creates any number of new survey questions using a passed in array containing multiple objects with
@@ -188,6 +207,18 @@ apiRoutes.delete('/delete/:id', async (req, res) => {
     };
     const deleteSurvey = await db.Survey.destroy(options);
     res.json(deleteSurvey);
+});
+
+// delete user
+apiRoutes.delete('/deleteUser', async (req, res) => {
+    console.log("-------------------------------");
+    await db.User.destroy({
+        where: {
+            id: req.user.id
+        }
+    });
+
+    res.end();
 });
 
 module.exports = apiRoutes;

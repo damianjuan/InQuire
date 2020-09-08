@@ -1,11 +1,25 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useQuestionContext } from "../utils/CreateQuestionState";
 import CreateMultiple from "../components/CreateMultiple";
+import API from "../utils/API";
 
 function CreateQuestion() {
     const questionRef = useRef();
     const typeRef = useRef();
     const [state, dispatch] = useQuestionContext();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { user } = await API.checkAuth();
+
+            dispatch({
+                call: "user",
+                user: user
+            });
+        };
+        fetchData();
+    }, []);
+
 
     function chooseType(questionType) {
         switch (questionType) {

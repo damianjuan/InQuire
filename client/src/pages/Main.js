@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
+import generate, { random } from "meaningful-string";
 
 function Main() {    
     const [loginUnauth, setLoginUnauth] = useState("none");
@@ -13,10 +14,45 @@ function Main() {
         })
         .then(() => {
             window.location.replace("/home");
+            console.log("success");
         })
         .catch(() => {
             setLoginUnauth("block");
         });
+    }
+
+    async function guestHandler(e) {
+        e.preventDefault();
+
+        // Set guest credentials
+        const guest = generate.random({
+            "startWith": "User",
+            "min": 3,
+            "max": 4,
+            "onlyNumbers": true,
+            "endWith": "@guest.email"
+        });
+        const guestPW = generate.random();
+        
+        try {
+            // Add guest to database
+            await API.signUp({
+                email: guest,
+                password: guestPW,
+                rank: "guest"
+            });
+        } catch (err) {
+            console.error(err);
+        } finally {
+            // login guest
+            await setTimeout(async () => {
+                await API.logIn({
+                    email: guest,
+                    password: guestPW
+                });
+                window.location.replace("/home");
+            }, 150);
+        }
     }
 
     return (
@@ -28,7 +64,7 @@ function Main() {
                 <button className="mx-auto my-4 p-2 bg-light rounded-full w-40" type="submit">Log In</button>
             </form>
             <div className="flex flex-col mx-auto w-full text-lg">
-                {/* <Link className="mx-auto p-2 bg-yellow-500 rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/create-survey'}>Login as Guest</Link><br /> */}
+                <button className="mx-auto my-4 p-2 bg-light rounded-full w-48" onClick={guestHandler}>Continue as Guest</button>
                 <Link className="mx-auto my-4 p-2 bg-light rounded-full w-40 text-center" to={process.env.PUBLIC_URL + '/signup'}>Sign Up</Link>
                 <p className="text-center text-red-500" style={{ display: loginUnauth }}>Email and password pair not found</p>
             </div>
