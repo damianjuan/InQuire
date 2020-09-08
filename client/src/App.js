@@ -33,7 +33,7 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Header user={this.state.currentUser} isAuthenticated={this.state.isAuthenticated} />
+                <Header isAuthenticated={this.state.isAuthenticated} />
                 <Switch>
                     <ProtectedRoute exact={true} path="/home/" component={HomePage} isAuthenticated={this.state.isAuthenticated} />
                     <ProtectedRoute exact={true} path="/create-survey/" component={CreateSurvey} isAuthenticated={this.state.isAuthenticated} />

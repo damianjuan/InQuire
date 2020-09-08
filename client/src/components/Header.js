@@ -2,9 +2,7 @@ import React from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 
-function Header({ user, isAuthenticated }) {
-    console.log(user);
-
+function Header({ isAuthenticated }) {
     async function handleLogout(event) {
         event.preventDefault();
 

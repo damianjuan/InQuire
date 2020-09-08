@@ -35,7 +35,7 @@ export default function HomePage() {
 
                 <Link className="self-end my-4 p-2 bg-light rounded-full w-40" to={process.env.PUBLIC_URL + '/create-survey'} >Create New Survey</Link>
                 
-                <YourSurveys userSurveys={userSurveys} />
+                <YourSurveys currentUser={currentUser} userSurveys={userSurveys} />
             </div>
 
             <div className="bg-dark md:w-5/12 md:rounded p-8">
