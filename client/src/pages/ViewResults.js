@@ -22,7 +22,7 @@ export default function ViewResults() {
                 setData(res);
             })
             .catch(err => console.log(err));
-    });
+    }, []);
     
     if (data) {
         return (
