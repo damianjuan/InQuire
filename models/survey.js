@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
                 validate: {
                     len: [1]
                 }
+            },
+            publicity: {
+                type: DataTypes.STRING,
+                defaultValue: "private",
+                allowNull: false
             }
         }
     );

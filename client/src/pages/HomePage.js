@@ -1,66 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import axios from "axios";
 import API from '../utils/API';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import YourSurveys from "../components/YourSurveys";
+import PublicSurveys from "../components/PublicSurveys";
 
 // ToDo
 // make button for user to copy survey to clipboard use whatever the current host is 
 
-export default function HomePage(props) {
+export default function HomePage() {
     const [userSurveys, setUserSurveys] = useState([]);
-    const [userEmail, setUserEmail] = useState();
+    const [publicSurveys, setPublicSurveys] = useState([]);
+    const [currentUser, setCurrentUser] = useState({});
     // const [linkStart, setLinkStart] = useState();
 
     useEffect(() => {
-        //grabs surveys with uuid linked to user
-        // setLinkStart(process.env.PUBLIC_URL);
-        axios.get('api/get-user-surveys/').then(res => {
-            if (res.data.length > 0) {
-                setUserSurveys(res.data);
-                console.log("saved survey info to state");
+        const fetchData = async () => {
+            const yourSurveys = await API.getUserSurveys();
+            const { user } = await API.checkAuth();
+            const othersSurveys = await API.getPublicSurveys();
 
-            } else {
-                console.log("no surveys")
-            }
-        })
-        //grabs user email
-        axios.get('api/checkAuthentication').then(res => {
-            setUserEmail(res.data.user.email)
-        })
+            setUserSurveys(yourSurveys);
+            setCurrentUser(user);
+            setPublicSurveys(othersSurveys);
+        };
+        fetchData();
     }, []);
 
-    function handleDelete(uuid, event) {
-        event.preventDefault();
-        API.deleteSurvey(uuid);
-    }
-
     return (
-        <main className="flex flex-col bg-dark sm:w-2/3 lg:w-1/2 sm:rounded mx-auto my-8 p-8">
-            <header className="text-center text-lightgrey text-3xl mb-4 rounded-lg">
-                Welcome {userEmail}
-            </header>
+        <main className="flex flex-col md:flex-row justify-around m-8">
+            <div className="flex flex-col bg-dark md:w-5/12 md:rounded p-8">
+                <h2 className="text-center text-lightgrey text-3xl mb-4 rounded-lg">
+                    Welcome {currentUser.email ? currentUser.email.split("@")[0] : currentUser.email} <br />Your Surveys
+                </h2>
 
-            <Link className="self-end my-4 p-2 bg-light rounded-full w-40" to={process.env.PUBLIC_URL + '/create-survey'} >Create New Survey</Link>
-            <ul>
-                {userSurveys.map(({ survey_name, uuid }) => (
-                    <li className="">
-                        <h3 className="text-lightgrey text-3xl my-4 mx-2 rounded-lg">{survey_name}</h3>
-                        <div className="flex flex-row items-center my-4">
-                            <CopyToClipboard className="text-center mx-2 p-2 bg-light rounded-full w-40" text={`https://inquire-6846.herokuapp.com/take-survey/${uuid}`}>
-                                <button>Copy Survey Link</button>
+                <Link className="self-end my-4 p-2 bg-light rounded-full w-40" to={process.env.PUBLIC_URL + '/create-survey'} >Create New Survey</Link>
+                
+                <YourSurveys currentUser={currentUser} userSurveys={userSurveys} />
+            </div>
 
-                            </CopyToClipboard>
-                            {/* <button onClick="link to take survey" id="takeBtn" className="text-center m-2 p-2 bg-light rounded-full w-40 self-end"
-                            >Take</button> */}
-                            <Link className="mx-auto mx-2 p-2 bg-light rounded-full w-40 text-center" to={process.env.PUBLIC_URL + `/results/${uuid}`}>Results</Link>
-                            {/* <button onClick="link to view results here" id="result-Btn" className="text-center  m-2 p-2 bg-light rounded-full w-40 self-end"
-                            >Results</button> */}
-                            <button id="delete-Btn" surveyId={uuid} className="text-center mx-2 p-2 bg-light rounded-full w-40" onClick={(event) => { handleDelete(uuid, event) }}>Delete</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            <div className="bg-dark md:w-5/12 md:rounded p-8">
+                <h2 className="text-center text-lightgrey text-3xl mb-4 rounded-lg">
+                    Public Surveys
+                </h2>
+                <PublicSurveys publicSurveys={publicSurveys} />
+            </div>
 
         </main>
     )

@@ -8,6 +8,7 @@ This is an app build with React that allows users to create and share surveys. T
 - [Installing](#installing)
 - [Deployment](#deployment)
 - [Built With](#built-with)
+- [License](#license)
 - [Authors](#authors)
 - [Acknowledgements](#acknowledgments)
 
@@ -36,7 +37,10 @@ Deployed at https://inquire-6846.herokuapp.com/
   [MySQL](https://www.mysql.com/)  
   [react-copy-to-clipboard](https://github.com/nkbt/react-copy-to-clipboard)  
   [TailwindCSS](https://tailwindcss.com/)  
-  [Victory](https://formidable.com/open-source/victory/)  
+  [Victory](https://formidable.com/open-source/victory/) 
+
+## License
+This project uses the MIT license. 
 
 ## Authors
 [Juan Damian](https://github.com/damianjuan)  

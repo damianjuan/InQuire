@@ -3,8 +3,8 @@ import { useQuestionContext } from "../utils/CreateQuestionState";
 import API from "../utils/API";
 import { v4 as uuidv4 } from 'uuid';
 
-function SubmitSurvey() {
-    const [state, dispatch] = useQuestionContext();
+function SubmitSurvey({ manipulatePopOut }) {
+    const [state] = useQuestionContext();
     const uuid = uuidv4();
 
     function submitClick(e) {
@@ -14,7 +14,7 @@ function SubmitSurvey() {
             let answers = [];
             const questions = state.questions.map((questionItem, i) => {
                 questionItem.SurveyUuid = uuid;
-                questionItem.contents.map((answer) => {
+                questionItem.contents.forEach((answer) => {
                     if (answer) {
                         const item = { answer };
                         item.QuestionId = i;
@@ -26,13 +26,17 @@ function SubmitSurvey() {
                 return questionItem;
             });
 
-            API.publish({
-                survey_name: state.survey_title,
-                uuid: uuid,
-            },
+            API.publish(
+                state.user,
+                {
+                    publicity: state.publicity,
+                    survey_name: state.survey_title,
+                    uuid: uuid,
+                },
                 questions,
                 answers
             );
+            
             window.location.replace("/home");
         } else {
             !state.survey_title ? console.error("Please title the survey!") : console.error("Add at least one question!");
@@ -41,7 +45,7 @@ function SubmitSurvey() {
 
     return (
         <div className="flex">
-            <button className="mx-auto p-2 bg-light rounded-full w-40 self-end" onClick={submitClick} type="button">Publish Survey</button>
+            <button className="mx-auto p-2 bg-light rounded-full w-40 self-end" onClick={((state.user.rank === "guest") && state.survey_title && state.questions.length > 0) ? manipulatePopOut : submitClick} type="button">Publish Survey</button>
         </div>
     );
 }

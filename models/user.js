@@ -11,7 +11,7 @@ module.exports = function (sequelize, DataTypes) {
             unique: true,
             validate: {
                 isEmail: true,
-                len: [1]
+                len: [6]
             }
         },
         // The password cannot be null
@@ -19,9 +19,14 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1]
+                len: [6]
             }
         },
+        rank: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "user"
+        }
     });
 
     User.associate = function (models) {

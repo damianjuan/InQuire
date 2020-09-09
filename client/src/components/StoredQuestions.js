@@ -4,7 +4,7 @@ import DisplaySelectMultiple from "../components/DisplaySelectMultiple"
 import { useQuestionContext } from "../utils/CreateQuestionState";
 
 function StoredQuestions() {
-    const [state, dispatch] = useQuestionContext();
+    const [state] = useQuestionContext();
 
     function displayType({ id, question_type, contents }) {
 

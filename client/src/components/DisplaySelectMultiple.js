@@ -11,6 +11,8 @@ function DisplaySelectMultiple({ id, contents }) {
                             {item}
                         </label>
                     );
+                } else {
+                    return (<></>);
                 }
             })}
         </div>
