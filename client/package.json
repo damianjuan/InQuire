@@ -11,7 +11,7 @@
     "axios": "^0.19.2",
     "chokidar-cli": "^2.1.0",
     "npm-run-all": "^4.1.5",
-    "postcss": "^7.0.32",
+    "postcss": "^8.2.10",
     "postcss-cli": "^7.1.1",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
